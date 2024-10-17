@@ -1,56 +1,51 @@
+/* Mantén los estilos existentes */
 .experiencia {
   text-align: center;
-  padding: 80px 0; /* Aumenta el espacio alrededor del contenido */
-  background-color: #f9f9f9; /* Cambia el color de fondo según tu preferencia */
+  padding: 80px 0;
+  background-color: #f9f9f9;
 }
 
-/* Estilos para el encabezado de la experiencia */
 .experiencia-header {
-  margin-bottom: 40px; /* Aumenta el espacio entre la imagen y el título */
+  margin-bottom: 40px;
 }
 
-/* Estilos para la imagen de la experiencia */
 .experiencia-imagen {
-  width: 200px; /* Ajusta el tamaño de la imagen según sea necesario */
-  height: 200px; /* Asegura que la imagen tenga una altura consistente */
-  border-radius: 50%; /* Hace que la imagen sea circular */
-  border: 4px solid #fff; /* Agrega un borde blanco */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
-  transition: transform 0.3s ease-in-out; /* Agrega una transición suave */
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Estilos para el título de la experiencia */
 .experiencia-titulo {
-  font-size: 32px; /* Aumenta el tamaño del título */
+  font-size: 32px;
   font-weight: bold;
-  color: #333; /* Cambia el color del texto según tu preferencia */
+  color: #333;
 }
 
-/* Estilos para el párrafo de descripción de la experiencia */
 .experiencia-descripcion {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 600px; /* Limita el ancho del texto para una mejor legibilidad */
-  margin: 0 auto 40px; /* Centra el texto horizontalmente y agrega espacio inferior */
+  max-width: 600px;
+  margin: 0 auto 40px;
 }
 
 .experiencia-descripcion p {
-  font-size: 16px; /* Ajusta el tamaño del texto según tu preferencia */
-  line-height: 1.6; /* Ajusta la altura de línea para una mejor legibilidad */
-  color: #666; /* Cambia el color del texto según tu preferencia */
-  margin-left: 10px; /* Agrega un espacio entre el ícono y el texto */
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  margin-left: 10px;
 }
 
-/* Estilos para el ícono de la experiencia */
 .experiencia-icono {
-  font-size: 24px; /* Tamaño del ícono */
-  color: #333; /* Color del ícono */
+  font-size: 24px;
+  color: #333;
 }
 
-/* Estilos para la imagen de la experiencia al pasar el cursor sobre ella */
 .experiencia-imagen:hover {
-  transform: scale(1.1); /* Hace que la imagen se agrande ligeramente al pasar el cursor sobre ella */
+  transform: scale(1.1);
 }
 
 .clasificacion {
@@ -59,6 +54,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap; /* Asegura que las estrellas se ajusten en pantallas pequeñas */
 }
 
 input[type="radio"] {
@@ -95,4 +91,44 @@ input[type="radio"]:checked ~ label.star-label {
 input[type="radio"]:checked + label.star-label,
 input[type="radio"]:checked + label.star-label ~ label.star-label {
   color: orange;
+}
+
+/* --- Media queries para ajustar el diseño en diferentes tamaños de pantalla --- */
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media only screen and (max-width: 600px) {
+  label.star-label {
+    font-size: 1.5em; /* Reduce el tamaño de las estrellas */
+  }
+
+  .description {
+    font-size: 0.8em; /* Ajusta el tamaño del texto */
+  }
+
+  .clasificacion {
+    flex-direction: column; /* Muestra las estrellas en una columna en lugar de fila */
+  }
+
+  .star-container {
+    margin: 0.2em 0; /* Reduce el margen entre las estrellas */
+  }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media only screen and (max-width: 768px) {
+  label.star-label {
+    font-size: 1.8em; /* Ajusta el tamaño de las estrellas para tabletas */
+  }
+
+  .description {
+    font-size: 0.85em;
+  }
+
+  .clasificacion {
+    flex-wrap: wrap; /* Permite que las estrellas se ajusten en filas múltiples si es necesario */
+  }
+
+  .star-container {
+    margin: 0.4em; /* Ajusta el espacio para las tabletas */
+  }
 }

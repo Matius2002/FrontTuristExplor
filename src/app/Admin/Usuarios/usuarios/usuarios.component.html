@@ -1,7 +1,5 @@
 <div class="card-header">
-  <button class="boton-ayuda" (click)="toggleHelpModal()">
-    <i class="fas fa-question-circle"></i> Ayuda
-  </button>
+  <br>
   <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Usuario</h3>
   <div class="buscador">
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
@@ -64,6 +62,12 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+      <th (click)="sortColumn('fechaRegistro')">
+        Fecha
+        <span *ngIf="currentColumn === 'fechaRegistro'" class="sorting-icon">
+          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+        </span>
+      </th>
       <th>Acciones</th>
     </tr>
     </thead>
@@ -73,12 +77,14 @@
       <td [innerHTML]="highlightMatches(usuario.nombreUsuario, searchText)"></td>
       <td>{{ usuario.email }}</td>
       <td>{{ usuario.password }}</td>
-      <td>{{ usuario.fechaRegistro }}</td>
       <td>{{ usuario.rol?.rolName }}</td>
+      <td>{{ usuario.fechaRegistro }}</td>
       <td class="d-flex justify-content-center align-items-center">
+        <!--
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(usuario)">
           <i class="fas fa-edit"></i>
         </button>
+        -->
         <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarUsuario(usuario)">
           <i class="fas fa-trash"></i>
         </button>

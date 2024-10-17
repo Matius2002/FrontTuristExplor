@@ -1,0 +1,16 @@
+<div class="map-container"> <!--Contenedor principal-->
+  <input id="pac-input" #searchBox class="controls" type="text" placeholder="Search Box"> <!--Campo de busqueda-->
+  <div id="map"></div> <!--Contenedor del mapa-->
+
+  <!-- Botones para filtrar categorías -->
+  <div class="category-buttons">
+    <button (click)="filterCulturalPlaces()">Cultural</button>
+    <button (click)="filterGastronomicPlaces()">Gastronómico</button>
+    <button (click)="filterReligiousPlaces()">Religioso</button>
+    <button (click)="filterAventurePlaces()">Aventura</button>
+    <button (click)="filterSustainablePlaces()">Sostenible</button>
+    <button (click)="filterPlaces('store')">Compras</button>
+    <button (click)="filterPlaces('night_club')">Nocturno</button>
+    <button (click)="filterPlaces('hotel')">Alojamientos</button>
+  </div>
+</div>

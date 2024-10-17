@@ -1,0 +1,323 @@
+.adventure-header {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+  background: linear-gradient(to bottom right, rgba(0, 123, 255, 0.7), rgba(0, 123, 255, 0.3));
+}
+
+.adventure-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.adventure-content {
+  padding: 100px 20px;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.adventure-title {
+  font-size: 4em;
+  margin-bottom: 20px;
+  animation: slideInFromLeft 1s ease;
+  font-family: 'Helvetica', sans-serif;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.adventure-subtitle {
+  text-align: center;
+  font-size: 2em;
+  animation: slideInFromRight 1s ease;
+  font-family: 'Helvetica', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Animaciones */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .adventure-title {
+    font-size: 3em;
+  }
+  .adventure-subtitle {
+    font-size: 1.5em;
+  }
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: roboto, serif;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+  max-width: 300px; /* Asegura un tamaño máximo para las tarjetas */
+  width: 100%;
+}
+
+.card-image {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  height: 210px; /* Asegura una altura consistente para todas las imágenes */
+}
+
+.card-text {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-text .date {
+  color: rgb(255, 7, 110);
+  font-size: 13px;
+}
+
+.card-text h3 {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.card-text p {
+  color: grey;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.card-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.card-thumbnail {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card-thumbnail:hover {
+  transform: scale(1.1);
+}
+
+.card-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgb(102, 181, 246);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.card-stats .stat {
+  margin-bottom: 15px;
+  color: white;
+}
+
+.card-stats .type {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.card-stats ul {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgb(71, 198, 239);
+}
+
+@media (max-width: 600px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center; /* Centra el contenido verticalmente */
+  }
+  .card {
+    max-width: 100%; /* Ajusta el tamaño máximo de la tarjeta para pantallas pequeñas */
+  }
+}
+
+
+/* Estilos para el Modal de Información */
+.info-modal {
+  display: none; /* Inicialmente oculto */
+  position: fixed; /* Fijo en la pantalla */
+  z-index: 1001; /* Asegúrate de que esté por encima de otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Agrega scroll si es necesario */
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro con más opacidad */
+}
+
+.info-modal.show {
+  display: block; /* Mostrar cuando esté abierto */
+}
+
+.info-modal-content {
+  background: linear-gradient(135deg, #ffffff, #f0f4f8); /* Degradado sutil */
+  margin: 10% auto; /* Ajuste del margen */
+  padding: 30px; /* Espacio interior aumentado */
+  border-radius: 15px; /* Bordes redondeados */
+  width: 90%; /* Ancho del modal */
+  max-width: 800px; /* Ancho máximo */
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2); /* Sombra más profunda */
+  animation: fadeIn 0.4s ease; /* Animación de aparición */
+  position: relative; /* Posición relativa para el cierre */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-modal .close {
+  cursor: pointer;
+  font-size: 30px;
+  color: #ff4757; /* Color rojo para el botón de cierre */
+  position: absolute; /* Para posicionarlo correctamente */
+  top: 15px;
+  right: 20px;
+  transition: color 0.3s; /* Transición suave de color */
+}
+
+.info-modal .close:hover {
+  color: #e84118; /* Color más oscuro al pasar el ratón */
+}
+
+/* Estilos del contenido del modal */
+.info-modal-content h3 {
+  font-size: 26px;
+  color: #333; /* Color de título */
+  margin-bottom: 15px;
+  text-align: center; /* Centrar el título */
+  font-family: 'Montserrat', sans-serif; /* Fuente moderna */
+  text-transform: uppercase; /* Título en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+.info-modal-content p {
+  font-size: 18px; /* Aumentar tamaño de fuente */
+  color: #555; /* Color de texto */
+  line-height: 1.8; /* Espaciado entre líneas */
+  margin: 10px 0; /* Margen superior e inferior */
+}
+
+/* Estilos para el botón "Ver Más" */
+.ver-mas-boton {
+  display: inline-block; /* Para que tenga un comportamiento de bloque */
+  padding: 12px 24px; /* Espaciado interno aumentado */
+  font-size: 18px; /* Tamaño de fuente */
+  color: #fff; /* Color del texto */
+  background-color: #28a745; /* Verde atractivo */
+  border: none; /* Sin borde */
+  border-radius: 25px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+  text-align: center; /* Centrar el texto */
+  text-decoration: none; /* Sin subrayado */
+  box-shadow: 0 4px 20px rgba(40, 167, 69, 0.5); /* Sombra */
+  margin-top: 20px; /* Margen superior */
+}
+
+.ver-mas-boton:hover {
+  background-color: #218838; /* Color de fondo al pasar el ratón */
+  transform: translateY(-2px); /* Efecto de elevar el botón */
+}
+
+.ver-mas-boton:focus {
+  outline: none; /* Sin borde de enfoque */
+}
+
+.ver-mas-boton:active {
+  transform: translateY(1px); /* Efecto de pulsar el botón */
+}
+
+.imagenes-container {
+  margin-top: 15px;
+}
+
+.imagenes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Grilla responsiva */
+  gap: 10px; /* Espacio entre las imágenes */
+}
+
+.imagen-thumbnail {
+  height: 100px; /* Altura fija para las miniaturas */
+  background-size: cover; /* Cubrir toda la miniatura */
+  background-position: center; /* Centrar la imagen */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+
+

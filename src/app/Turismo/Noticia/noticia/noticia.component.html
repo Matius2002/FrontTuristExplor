@@ -1,7 +1,5 @@
 <div class="card-header">
-  <button class="boton-ayuda" (click)="toggleHelpModal()">
-    <i class="fas fa-question-circle"></i> Ayuda
-  </button>
+  <br>
   <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Noticias</h3>
   <div class="buscador">
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
@@ -64,12 +62,14 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+      <!--
       <th (click)="sortColumn('imagenes')">
         Imagenes
         <span *ngIf="currentColumn === 'imagenes'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+      -->
       <th (click)="sortColumn('tipoTurismos')">
         Tipo Turismos
         <span *ngIf="currentColumn === 'tipoTurismos'" class="sorting-icon">
@@ -86,7 +86,9 @@
       <td>{{ noticia.contenido }}</td>
       <td>{{ noticia.fechaPublicacion }}</td>
       <td>{{ noticia.fuente }}</td>
+      <!--
       <td>{{ noticia.imagenes?.nombre }}</td>
+      -->
       <td>{{ noticia.tipoTurismo?.nombre }}</td>
       <td class="d-flex justify-content-center align-items-center">
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(noticia)">

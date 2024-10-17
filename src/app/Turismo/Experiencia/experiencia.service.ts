@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {entornos} from "../../Entorno/entornos";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 interface Usuario {
   id: number;
   nombreUsuario: string;
+  email: string;
 
 }
 interface Destinos {
@@ -18,7 +19,7 @@ interface Experiencia {
   comentario: string;
   fecha: string;
   usuario: Usuario;
-  destinos: Destinos;
+  destino: Destinos;
 }
 @Injectable({
   providedIn: 'root'
@@ -32,12 +33,43 @@ export class ExperienciaService {
 
   }
   // Function para guardar una nueva experiencia
-  guardarExperiencia(tipoAlojamiento: Experiencia): Observable<Experiencia> {
-    return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, tipoAlojamiento)
+  /*
+  guardarExperiencia(experiencia: Experiencia): Observable<Experiencia> {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      throw new Error('No se encontró ningún token');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<Experiencia>(`${this.baseUrl}/experiencias/guardarExperiencia`, experiencia, { headers })
       .pipe(
         catchError(this.handleError)
       );
   }
+
+   */
+  guardarExperiencia(experiencia: any): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      // Aquí puedes manejar el error en caso de que el token no esté disponible
+      return throwError('Token no disponible');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.baseUrl}/experiencias/guardarExperiencia`, experiencia, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 
   // Eliminar experiencias
   eliminarExperiencia(id: number): Observable<void> {
@@ -67,6 +99,13 @@ export class ExperienciaService {
     // Asegúrate de que el ID en el cuerpo de la solicitud sea igual al ID en la URL
     tipoActualizada.id = id;
     return this.http.put<Experiencia>(`${this.baseUrl}/experiencias/${id}`, tipoActualizada)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  recuperarTodosDestinos(): Observable<Destinos[]> {
+    return this.http.get<Destinos[]>(`${this.baseUrl}/destinos/obtenerTodosLosDestinos`)
       .pipe(
         catchError(this.handleError)
       );

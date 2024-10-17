@@ -1,8 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import {Routes } from '@angular/router';
 // Importación de todos los componentes necesarios
 import { NuevoAlojamientoComponent } from './Turismo/Alojamiento/nuevo-alojamiento/nuevo-alojamiento.component';
 import { NuevoDestinoComponent } from './Turismo/Destinos/nuevo-destino/nuevo-destino.component';
@@ -51,66 +47,84 @@ import { BreadcrumbsComponent } from './Shared/breadcrumbs/breadcrumbs.component
 import { AlojamientoComponent } from './Turismo/Alojamiento/alojamiento/alojamiento.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { TurismoSostenibleComponent } from './Turismo/TipoTurismo/turismo-sostenible/turismo-sostenible.component';
-import {authGuard} from "./AuthGuard";
-
+import {DetalleNoticiaComponent} from "./Turismo/Noticia/detalle-noticia/detalle-noticia.component";
+import {MapComponent} from "./map/map.component";
+import {authGuard} from "./auth.guard";
 
 
 export const routes: Routes = [
   {
+    path: '', // Ruta raíz
+    redirectTo: 'login', // Redirige al login
+    pathMatch: 'full' // Asegura que la ruta raíz redirige completamente
+  },
+  {
+    path: 'login', // Ruta para el login
+    component: LoginComponent
+  },
+  {
     path: '',
     component: PagesComponent,
     children: [
-      { path: '', redirectTo: 'tu-inicio', pathMatch: 'full' },
+      //{ path: '', redirectTo: 'tu-inicio', pathMatch: 'full' },
       { path: 'tu-inicio', component: InicioComponent },
       { path: 'Conoce-Girardot', component: ConoceGirardotComponent, canActivate: [authGuard]},
-      { path: 'sistemas', component: SistemaComponent },
-      { path: 'evento-contenido', component: EventoContenidoComponent },
-      { path: 'tipo-sostenible', component: TurismoSostenibleComponent },
-      { path: 'nueva-experiencia', component: NuevaExperienciaComponent },
-      { path: 'noticia-contenido', component: NoticiasContenidoComponent },
-      //{ path: 'tu-inicio', component: InicioComponent, canActivate: [AuthGuard] },
+      { path: 'sistemas', component: SistemaComponent, canActivate: [authGuard]}, // Ruta protegida para sistemas
+      { path: 'evento-contenido', component: EventoContenidoComponent, canActivate: [authGuard] },
+      { path: 'tipo-sostenible', component: TurismoSostenibleComponent , canActivate: [authGuard]},
+      { path: 'nueva-experiencia', component: NuevaExperienciaComponent, canActivate: [authGuard] },
+      {path: 'maps', component: MapComponent, canActivate: [authGuard]},
+      { path: 'noticias/:id', component: DetalleNoticiaComponent , canActivate: [authGuard]},
+
+      { path: 'noticia-contenido', component: NoticiasContenidoComponent, canActivate: [authGuard] },
+      { path: 'tipo-cultural', component: TurismoCulturalComponent, canActivate: [authGuard] },
+      { path: 'tipo-gastronomico', component: TurismoGastronomicoComponent, canActivate: [authGuard] },
+      { path: 'tipo-religioso', component: TurismoReligiosoComponent, canActivate: [authGuard] },
+      { path: 'tipo-aventura', component: TurismoAventurasComponent, canActivate: [authGuard] },
+      { path: 'tipo-compras', component: TurismoComprasComponent, canActivate: [authGuard] },
+      { path: 'tipo-nocturno', component: TurismoNocturnoComponent, canActivate: [authGuard] },
+      { path: 'alojamiento-contenido', component: AlojamientoContenidoComponent, canActivate: [authGuard] },
+      { path: 'destinos', component: DestinosComponent, canActivate: [authGuard] },
+      { path: 'tipo-turismo', component: TipoTurismoComponent, canActivate: [authGuard] },
+      { path: 'tipo-alojamiento', component: TipoAlojamientoComponent, canActivate: [authGuard] },
+      { path: 'images', component: ImagesComponent, canActivate: [authGuard] },
+      { path: 'atraciones-principales', component: AtracionesPrincipalComponent },
+      { path: 'epoca-visitar', component: EpocaVisitarComponent, canActivate: [authGuard] },
+      { path: 'noticias', component: NoticiaComponent, canActivate: [authGuard] },
+      { path: 'eventos', component: EventoComponent, canActivate: [authGuard] },
+      { path: 'experiencias', component: ExperienciaComponent, canActivate: [authGuard] },
+      { path: 'roles', component: RolesComponent },
+      { path: 'permisos', component: PermisosComponent, canActivate: [authGuard] },
+      { path: 'usuarios', component: UsuariosComponent },
+
+      { path: 'reportes', component: ReportesComponent, canActivate: [authGuard] },
+      { path: 'alojamientos', component: AlojamientoComponent, canActivate: [authGuard] },
+
+      //SUB RAMAS
+      { path: 'nuevo-destinos', component: NuevoDestinoComponent, canActivate: [authGuard] },
+      { path: 'nuevo-tipoTurismo', component: NuevoTipoTurismoComponent, canActivate: [authGuard] },
+      { path: 'nuevo-tipoAlojamiento', component: NuevoTipoAlojamientoComponent, canActivate: [authGuard] },
+      { path: 'nueva-noticia', component: NuevaNoticiaComponent, canActivate: [authGuard] },
+      { path: 'nuevo-evento', component: NuevoEventoComponent, canActivate: [authGuard] },
+      { path: 'nueva-epoca', component: NuevaEpocaVisitarComponent, canActivate: [authGuard] },
+      { path: 'nueva-atracciones', component: NuevaAtracionesComponent, canActivate: [authGuard] },
+      { path: 'nueva-imagen', component: NuevaImagesComponent, canActivate: [authGuard] },
+      { path: 'nuevo-rol', component: NuevoRolComponent},
+      { path: 'nuevo-permiso', component: NuevoPermisoComponent, canActivate: [authGuard] },
+      { path: 'nuevo-usuario', component: NuevoUsuarioComponent },
+      { path: 'nuevo-alojamiento', component: NuevoAlojamientoComponent, canActivate: [authGuard] },
+
     ]
   },
-  { path: 'pages', component: PagesComponent },
-  { path: 'topbar', component: NavbarTopbarComponent },
-  { path: 'navbar', component: NavBarComponent },
-  { path: 'breadcrumbs', component: BreadcrumbsComponent },
-  { path: 'footer', component: FooterComponent },
-  { path: 'nuevo-alojamiento', component: NuevoAlojamientoComponent },
-  { path: 'nuevo-destinos', component: NuevoDestinoComponent },
-  { path: 'nuevo-tipoTurismo', component: NuevoTipoTurismoComponent },
-  { path: 'nuevo-tipoAlojamiento', component: NuevoTipoAlojamientoComponent },
-  { path: 'nueva-noticia', component: NuevaNoticiaComponent },
-  { path: 'nuevo-evento', component: NuevoEventoComponent },
-  { path: 'nueva-epoca', component: NuevaEpocaVisitarComponent },
-  { path: 'nueva-atracciones', component: NuevaAtracionesComponent },
-  { path: 'nueva-imagen', component: NuevaImagesComponent },
-  { path: 'nuevo-rol', component: NuevoRolComponent },
-  { path: 'nuevo-permiso', component: NuevoPermisoComponent },
-  { path: 'nuevo-usuario', component: NuevoUsuarioComponent },
-  { path: 'tipo-turismo', component: TipoTurismoComponent },
-  { path: 'tipo-alojamiento', component: TipoAlojamientoComponent },
-  { path: 'images', component: ImagesComponent },
-  { path: 'destinos', component: DestinosComponent },
-  { path: 'atraciones-principales', component: AtracionesPrincipalComponent },
-  { path: 'epoca-visitar', component: EpocaVisitarComponent },
-  { path: 'noticias', component: NoticiaComponent },
-  { path: 'eventos', component: EventoComponent },
-  { path: 'experiencias', component: ExperienciaComponent },
-  { path: 'roles', component: RolesComponent },
-  { path: 'permisos', component: PermisosComponent },
-  { path: 'usuarios', component: UsuariosComponent },
+  { path: 'pages', component: PagesComponent, canActivate: [authGuard] },
+  //{ path: 'topbar', component: NavbarTopbarComponent },
+  { path: 'navbar', component: NavBarComponent, canActivate: [authGuard] },
+  { path: 'breadcrumbs', component: BreadcrumbsComponent , canActivate: [authGuard]},
+  { path: 'footer', component: FooterComponent , canActivate: [authGuard]},
+
   { path: 'login', component: LoginComponent },
-  { path: 'reportes', component: ReportesComponent },
-  { path: 'alojamientos', component: AlojamientoComponent },
-  { path: 'tu-experiencia', component: ExperienciaContenidoComponent },
-  { path: 'alojamiento-contenido', component: AlojamientoContenidoComponent },
-  { path: 'tipo-cultural', component: TurismoCulturalComponent },
-  { path: 'tipo-gastronomico', component: TurismoGastronomicoComponent },
-  { path: 'tipo-religioso', component: TurismoReligiosoComponent },
-  { path: 'tipo-compras', component: TurismoComprasComponent },
-  { path: 'tipo-aventura', component: TurismoAventurasComponent },
-  { path: 'tipo-nocturno', component: TurismoNocturnoComponent },
+  {path: 'tu-experiencia', component: ExperienciaContenidoComponent, canActivate: [authGuard] },
+
 ];
 
 

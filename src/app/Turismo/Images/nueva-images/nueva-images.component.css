@@ -120,10 +120,14 @@ label {
   font-weight: bold;
 }
 
+/* Para inputs de texto y archivo */
 input[type="text"], input[type="file"] {
+  width: 100%; /* Ocupar todo el ancho disponible */
   padding: 0.5em;
   font-size: 1em;
+  box-sizing: border-box; /* Asegura que el padding no exceda el contenedor */
 }
+
 .select-file-label {
   display: block;
   margin-bottom: 5px; /* Ajusta el margen inferior según tu diseño */
@@ -159,4 +163,62 @@ input[type="text"], input[type="file"] {
   margin-top: 5px; /* Ajusta el margen superior según tu diseño */
   font-size: 14px; /* Tamaño de la fuente */
   color: #f00; /* Color del texto */
+}
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .container .card-body {
+    padding: 8px;
+  }
+
+  .file-input {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .file-info {
+    font-size: 12px;
+  }
+
+  .btn-group-sm > .btn {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container .card-body {
+    padding: 6px;
+  }
+
+  .file-input {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .file-info {
+    font-size: 11px;
+  }
+
+  .btn-group-sm > .btn {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .btn-group-sm .fas {
+    font-size: 0.65rem;
+  }
+}
+
+/* Media queries para dispositivos más pequeños */
+@media (max-width: 768px) {
+  input[type="text"], input[type="file"] {
+    padding: 0.4em; /* Reduce el padding en pantallas pequeñas */
+    font-size: 0.9em; /* Ajusta el tamaño de la fuente para móviles */
+  }
+}
+
+@media (max-width: 576px) {
+  input[type="text"], input[type="file"] {
+    padding: 0.3em; /* Aún más pequeño para pantallas muy pequeñas */
+    font-size: 0.85em; /* Fuente aún más pequeña en móviles más pequeños */
+  }
 }

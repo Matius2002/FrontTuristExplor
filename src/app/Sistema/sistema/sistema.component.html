@@ -1,16 +1,19 @@
+<div class="mi-separador-div"></div>
 <div class="contenedor-principal">
   <div class="header">
     <button class="boton-dashboard" (click)="navigateTo('tu-inicio')">
-      <i class="fas fa-home"></i> Regresar
+      <i class="fas fa-home"></i> <span>Regresar</span>
     </button>
     <button class="boton-ayuda" (click)="toggleHelpModal()">
-      <i class="fas fa-question-circle"></i> Ayuda
+      <i class="fas fa-question-circle"></i> <span>Ayuda</span>
     </button>
   </div>
+
   <!-- Ventana emergente de ayuda -->
-  <div class="modal-ayuda" [class.show]="isHelpModalVisible">
-    <div class="modal-content">
-      <span class="close" (click)="toggleHelpModal()">&times;</span>
+
+  <div class="modal-ayuda-unico" [class.show]="isHelpModalVisible">
+    <div class="modal-content-ayuda-unico">
+      <span class="close-ayuda-unico" (click)="toggleHelpModal()">&times;</span>
       <h3 class="text-danger text-center" style="font-size: 2rem;">Ayuda del Panel Administrativo</h3>
       <ul>
         <li>
@@ -59,6 +62,7 @@
     </div>
   </div>
 
+
   <div class="contenedor-secundario">
     <h3 class="text-center">Panel Administrativo de TuristExplor</h3>
     <p>El Panel Administrativo de TuristExplor te permite gestionar todos los aspectos relacionados con destinos turísticos, tipos de turismo, atracciones, eventos, épocas para visitar, noticias, imágenes, experiencias, alojamiento, usuarios, roles y permisos.</p>
@@ -100,9 +104,11 @@
     <button class="boton" data-name="Roles" (click)="navigateTo('roles')">
       <span>Roles</span><i class="fas fa-user-tag"></i>
     </button>
+    <!--
     <button class="boton" data-name="Permisos" (click)="navigateTo('permisos')">
       <span>Permisos</span><i class="fas fa-lock"></i>
     </button>
+    -->
     <button class="boton" data-name="Reportes" (click)="navigateTo('reportes')">
       <span>Reportes</span><i class="fa fa-flag"></i>
     </button>
@@ -112,5 +118,5 @@
   </div>
 </div>
 
-
+<div class="mi-separador-div"></div>
 

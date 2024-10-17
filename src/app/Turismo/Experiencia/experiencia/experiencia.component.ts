@@ -121,7 +121,7 @@ export class ExperienciaComponent implements OnInit {
             comentario: experiencia.comentario,
             fecha: experiencia.fecha,
             usuario: experiencia.usuario,
-            destinos: experiencia.destinos
+            destinos: experiencia.destino
           };
         });
         this.totalPages = Math.ceil(this.experiencias.length / this.itemsPerPage);

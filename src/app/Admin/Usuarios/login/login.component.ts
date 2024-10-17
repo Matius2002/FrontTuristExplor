@@ -48,8 +48,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.crearForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(10)]]
-
+      password: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
@@ -69,10 +68,14 @@ export class LoginComponent implements OnInit{
     };
 
     this.usuarioService.login(credentials).subscribe(
-      (response: any) => {
-        if (response && response.success) {
-          // Almacenar el email del usuario en el local storage
-          localStorage.setItem('userEmail', this.crearForm.value.email);
+      response => {
+        console.log('Respuesta del servidor:', response); // Verificar la respuesta
+
+        // Verificar el token antes de almacenarlo
+        if (response && response.token) {
+          this.usuarioService.guardarUsuarioEnStorage(response.token);
+          this.usuarioService.guardarToken(response.token);
+          console.log('Token guardado correctamente:', response.token); // Confirmar que se guardó el token
 
           Swal.fire({
             icon: 'success',
@@ -81,22 +84,25 @@ export class LoginComponent implements OnInit{
             this.router.navigate(['/tu-inicio']);
           });
         } else {
+          console.log('Error: No se recibió un token válido');
           Swal.fire({
             icon: 'error',
-            title: 'Error al iniciar sesión',
-            text: 'Correo electrónico o contraseña incorrectos.',
+            title: 'Error de autenticación',
+            text: 'No se recibió un token válido.',
           });
         }
       },
-      (error: any) => {
+      error => {
+        console.error('Error al iniciar sesión:', error);
         Swal.fire({
           icon: 'error',
-          title: 'Error al iniciar sesión',
-          text: 'Intente nuevamente más tarde.',
+          title: 'Error',
+          text: 'Error al iniciar sesión.',
         });
       }
     );
   }
+
 
   limpiarFormulario() {
     this.crearForm.reset();

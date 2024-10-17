@@ -9,6 +9,7 @@ import {UsuarioService} from "../../../Admin/Usuarios/usuario.service";
 interface Usuario {
   id: number;
   nombreUsuario: string;
+  email: string;
 
 }
 interface Destinos {
@@ -41,7 +42,6 @@ interface Experiencia {
   styleUrl: './nueva-experiencia.component.css'
 })
 export class NuevaExperienciaComponent implements OnInit{
-
   crearForm!: FormGroup;
   experiencias!: Experiencia;
   usuarios: Usuario [] = [];
@@ -51,8 +51,6 @@ export class NuevaExperienciaComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    //public dialogRef: MatDialogRef<NuevaExperienciaComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: any,
     private experienciaService: ExperienciaService,
     private router: Router,
     private usuariosService: UsuarioService,
@@ -60,72 +58,77 @@ export class NuevaExperienciaComponent implements OnInit{
 
   ngOnInit(): void {
     this.crearForm = this.formBuilder.group({
-      comentario: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      fecha: ['', [Validators.required]],
-      //usuarios: ['', [Validators.required]],
+      comentario: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(80)]],
       destinos: ['', [Validators.required]],
       calificacion: ['', Validators.required]
     });
-    this.currentUser = this.usuariosService.getCurrentUser(); // Obtener el usuario actual del servicio de autenticación
+    this.currentUser = this.usuariosService.getCurrentUser();
 
-    //this.usuarios();
-    //this.destinos();
+    this.cargarDestinos();
 
   }
-  onSubmit(): void {
-    if (this.crearForm.valid) {
-      this.isSubmitting = true;
-      const formData = this.crearForm.value;
-      if (!this.currentUser) {
-        formData.usuario = this.currentUser;// Agregar el usuario actual a los datos del formulario
-        this.guardarExperiencia(formData);
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Usuario no autenticado',
-          text: 'Por favor, inicie sesión'
-        });
+
+  cargarDestinos(): void {
+    this.experienciaService.recuperarTodosDestinos().subscribe(
+      (destinos: Destinos[]) => {
+        console.log('Destinos cargados:', destinos); // Verifica si los datos llegan correctamente
+        this.destinos = destinos;
+      },
+      (error) => {
+        console.error('Error al cargar destinos:', error);
       }
-      this.isSubmitting = false;
-    } else {
+    );
+  }
+
+  onSubmit(): void {
+    if (this.crearForm.invalid) {
       Swal.fire({
         icon: 'error',
         title: 'Formulario inválido',
-        text: 'Por favor, complete todos los campos requeridos'
+        text: 'Complete todos los campos correctamente.',
       });
+      return;
     }
-  }
-    guardarExperiencia(experienciaData: Experiencia): void {
-      console.log('Datos de la experiencia:', experienciaData);
-      this.experienciaService.guardarExperiencia(experienciaData).subscribe(() => {
+
+    const experiencia = this.crearForm.value;
+
+    // Asigna correctamente el destinoId
+    experiencia.destinoId = experiencia.destinos.id;
+
+    // Elimina el campo destinos antes de enviar al backend
+    delete experiencia.destinos;
+
+    this.experienciaService.guardarExperiencia(experiencia).subscribe(
+      response => {
         Swal.fire({
           icon: 'success',
-          title: 'La Experiencia fue creada correctamente',
-          showConfirmButton: false,
-          timer: 2500
+          title: 'Experiencia guardada con éxito',
+        }).then(() => {
+          // Resetea el formulario para agregar un nuevo comentario
+          this.crearForm.reset();
         });
-        this.crearForm.reset();
-      }, (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Error al guardar La Experiencia'
-        });
-      });
+      },
+      error => {
+        if (error.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'No estás autenticado',
+            text: 'Por favor, inicia sesión nuevamente.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al guardar la experiencia.',
+          });
+        }
+      }
+    );
   }
 
   limpiarFormulario() {
     this.crearForm.reset();
-
   }
-
-  /*
-    onCancelar(): void {
-      this.dialogRef.close();
-    }
-
-   */
-
   volver() {
     this.router.navigate(['/tu-inicio']);
   }
