@@ -1,53 +1,74 @@
-<!-- editar-rol.component.html -->
+<!-- Editar Rol Modal: Componente de edición de roles -->
 <div mat-dialog-content class="modal-content-editar-turismo">
+  <!-- Encabezado del modal con el título "Editar Rol" -->
   <div class="modal-header-editar-turismo">
     <h5 class="modal-title-editar-turismo">Editar Rol</h5>
+    <!-- Botón para cerrar el modal -->
     <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+
+  <!-- Cuerpo del modal que contiene el formulario para editar el rol -->
   <div class="modal-body-editar-turismo">
+    <!-- Formulario reactivo que se vincula a la propiedad 'crearForm' en el componente -->
     <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
-      <!-- inicio nombre -->
+
+      <!-- Sección de Nombre del Rol -->
       <div class="form-group-editar-turismo">
+        <!-- Etiqueta para el campo 'rolName' -->
         <label for="rolName">Nombre del Rol</label>
+        <!-- Campo de texto para ingresar el nombre del rol, con validación -->
         <input type="text" id="rolName" formControlName="rolName" placeholder="Ingresa el Nombre del Rol" class="form-control-editar-turismo">
+
+        <!-- Validación del campo 'rolName': muestra mensajes de error si es inválido -->
         <div *ngIf="crearForm.get('rolName')?.invalid && (crearForm.get('rolName')?.dirty || crearForm.get('rolName')?.touched)">
           <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolName')?.hasError('required')">El Rol es obligatorio.</div>
           <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolName')?.hasError('minlength')">El Rol debe tener al menos 5 caracteres.</div>
           <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolName')?.hasError('maxlength')">El Rol no debe exceder los 50 caracteres.</div>
         </div>
       </div>
-      <!-- fin nombre -->
+      <!-- Fin de la sección 'Nombre del Rol' -->
 
-      <!-- inicio descripción -->
+      <!-- Sección de Descripción del Rol -->
       <div class="form-group-editar-turismo">
+        <!-- Etiqueta para el campo 'rolDescripc' -->
         <label for="rolDescripc">Descripción del Rol</label>
+        <!-- Campo de texto para ingresar la descripción del rol, con validación -->
         <textarea id="rolDescripc" formControlName="rolDescripc" placeholder="Ingresa la Descripción del Rol" rows="5" class="form-control-editar-turismo"></textarea>
+
+        <!-- Validación del campo 'rolDescripc': muestra mensajes de error si es inválido -->
         <div *ngIf="crearForm.get('rolDescripc')?.invalid && (crearForm.get('rolDescripc')?.dirty || crearForm.get('rolDescripc')?.touched)">
           <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolDescripc')?.hasError('required')">La descripción es obligatoria.</div>
           <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolDescripc')?.hasError('minlength')">La descripción debe tener al menos 10 caracteres.</div>
           <div class="text-danger-editar-turismo" *ngIf="crearForm.get('rolDescripc')?.hasError('maxlength')">La descripción no debe exceder los 500 caracteres.</div>
         </div>
       </div>
-      <!-- fin descripción -->
+      <!-- Fin de la sección 'Descripción del Rol' -->
 
-      <!-- inicio fechas -->
+      <!-- Sección de Fechas -->
       <div class="form-group-editar-turismo">
+        <!-- Etiqueta para el campo 'rolFechaCreac' (Fecha de Creación) -->
         <label for="rolFechaCreac">Fecha de Creación</label>
+        <!-- Campo de fecha para seleccionar la fecha de creación del rol -->
         <input type="date" id="rolFechaCreac" formControlName="rolFechaCreac" class="form-control-editar-turismo">
       </div>
 
       <div class="form-group-editar-turismo">
+        <!-- Etiqueta para el campo 'rolFechaModic' (Fecha de Modificación) -->
         <label for="rolFechaModic">Fecha de Modificación</label>
+        <!-- Campo de fecha para seleccionar la fecha de modificación del rol -->
         <input type="date" id="rolFechaModic" formControlName="rolFechaModic" class="form-control-editar-turismo">
       </div>
-      <!-- fin fechas -->
+      <!-- Fin de la sección 'Fechas' -->
 
-      <!-- Botones -->
+      <!-- Sección de botones -->
       <div class="modal-footer-editar-turismo">
+        <!-- Botón para cancelar la edición y cerrar el modal -->
         <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+        <!-- Botón para enviar el formulario y actualizar el rol -->
         <button type="submit" class="btn btn-primary">Actualizar</button>
+        <!-- Botón para limpiar los campos del formulario -->
         <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
       </div>
     </form>
