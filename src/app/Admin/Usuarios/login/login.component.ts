@@ -117,6 +117,6 @@ export class LoginComponent implements OnInit{
   }
 
   goToForgetPassword() {
-
   }
+  //Esto es una prueba
 }
