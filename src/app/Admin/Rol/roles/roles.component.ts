@@ -15,22 +15,27 @@ import Swal from "sweetalert2";
 import * as ExcelJS from "exceljs";
 import {EditarRolesComponent} from "../editar-roles/editar-roles.component";
 
-interface  Rol {
-  id: number;
-  rolName: string;
-  rolDescripc: string;
-  rolFechaCreac: Date;
-  rolFechaModic: Date;
+// Definición de la interfaz Rol
+interface Rol {
+  id: number;               // ID del rol
+  rolName: string;          // Nombre del rol
+  rolDescripc: string;      // Descripción del rol
+  rolFechaCreac: Date;      // Fecha de creación del rol
+  rolFechaModic: Date;      // Fecha de modificación del rol
 }
+
+// Definición de la interfaz Item (usada para la búsqueda y filtrado)
 interface Item {
-  id: number;
-  rolName: string;
+  id: number;               // ID del ítem
+  rolName: string;          // Nombre del rol en el ítem
 }
+
+// Definición del componente Angular
 @Component({
-  providers: [RolesService, HttpClient],
-  selector: 'app-roles',
-  standalone: true,
-  imports: [
+  providers: [RolesService, HttpClient],  // Proveedores del servicio RolesService y HttpClient
+  selector: 'app-roles',                  // Selector del componente
+  standalone: true,                       // Componente independiente
+  imports: [                              // Módulos que se importan en el componente
     HttpClientModule,
     NgIf,
     DecimalPipe,
@@ -44,51 +49,55 @@ interface Item {
     NgxPaginationModule,
     FilterPipe,
   ],
-  templateUrl: './roles.component.html',
-  styleUrl: './roles.component.css'
+  templateUrl: './roles.component.html',   // Ruta del archivo HTML del componente
+  styleUrl: './roles.component.css'        // Ruta del archivo CSS del componente
 })
-export class RolesComponent implements OnInit{
-  isHelpModalVisible: boolean = false;
-  roles: Rol[] = [];
-  page = 1; // Inicializa la página en 1
-  itemsPerPage = 5; // Número de elementos por página
-  totalPages = 0; // Número total de páginas
-  currentColumn: string = 'id'; // Columna inicial para ordenar
-  sortOrder: string = 'asc';
+export class RolesComponent implements OnInit {
+  isHelpModalVisible: boolean = false;     // Control de visibilidad del modal de ayuda
+  roles: Rol[] = [];                       // Arreglo para almacenar los roles
+  page = 1;                                // Página inicial (para paginación)
+  itemsPerPage = 5;                        // Número de elementos por página
+  totalPages = 0;                          // Total de páginas para la paginación
+  currentColumn: string = 'id';            // Columna actual para ordenar
+  sortOrder: string = 'asc';               // Orden de clasificación (ascendente o descendente)
 
-  // Eliminar
-  showAlert: boolean = false;
-  rolToDelete: Rol | null = null;
-  rolEliminado: boolean = false;
-  errorMessage: string | null = null;
+  // Variables para la funcionalidad de eliminar
+  showAlert: boolean = false;              // Controla la visibilidad de la alerta
+  rolToDelete: Rol | null = null;          // Rol que será eliminado
+  rolEliminado: boolean = false;           // Indicador de rol eliminado
+  errorMessage: string | null = null;      // Mensaje de error al eliminar
 
-  //búsqueda
-  searchText: string = '';
-  items: Item[] = [];
-  filteredItems: Item[] = [];
-  displayedItems: Item[] = [];
-  searchNotFound: boolean = false;
+  // Variables para búsqueda y filtrado
+  searchText: string = '';                 // Texto de búsqueda ingresado por el usuario
+  items: Item[] = [];                      // Arreglo con los ítems de búsqueda
+  filteredItems: Item[] = [];              // Arreglo con los ítems filtrados por búsqueda
+  displayedItems: Item[] = [];             // Ítems que se mostrarán en la tabla
+  searchNotFound: boolean = false;         // Indicador si no se encuentran resultados en la búsqueda
 
   constructor(
-    private rolesService: RolesService,
-    private dialog: MatDialog,
-    private router: Router,
-  ) {
+    private rolesService: RolesService,    // Servicio para manejar roles
+    private dialog: MatDialog,             // Servicio para abrir diálogos/modales
+    private router: Router,                // Servicio para navegación
+  ) {}
+
+  // Metodo del ciclo de vida de Angular, se llama cuando se inicializa el componente
+  ngOnInit(): void {
+    this.cargarRoles();                    // Carga los roles cuando el componente se inicializa
   }
 
-  ngOnInit(): void {
-    this.cargarRoles();
-  }
-  //Imprimir
+  // Metodo para imprimir la tabla
   printTable() {
     window.print();
   }
-  // Actualizar alojamiento
+
+  // Abre un modal para actualizar la información de un rol
   openUpdateModal(rol: Rol): void {
     const dialogRef = this.dialog.open(EditarRolesComponent, {
       width: '400px',
-      data: {rol}
+      data: { rol }                        // Pasa los datos del rol al componente de edición
     });
+
+    // Después de cerrar el modal, verifica si la actualización fue exitosa o falló
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
         Swal.fire('¡Actualizado!', 'El Rol se ha actualizado correctamente.', 'success');
@@ -97,60 +106,64 @@ export class RolesComponent implements OnInit{
       }
     });
   }
-  protected readonly Math = Math;
+
+  // Metodo para cargar los roles desde el servicio RolesService
   cargarRoles() {
-    // Lógica para cargar los datos de la base de datos.
     this.rolesService.recuperarTodosRol().subscribe(
       data => {
-        console.log("Datos recibidos del servidor:", data);
-        console.log("Cantidad de registros recibidos:", data.length);
-        this.roles = data.map(rol => {
-          return {
-            id: rol.id,
-            rolName: rol.rolName,
-            rolDescripc: rol.rolDescripc,
-            rolFechaCreac: rol.rolFechaCreac,
-            rolFechaModic: rol.rolFechaModic,
-          };
-        });
-        this.totalPages = Math.ceil(this.roles.length / this.itemsPerPage);
-
-        console.log("Datos del Rol cargados correctamente:", this.roles);
+        // Mapeo de los datos recibidos
+        this.roles = data.map(rol => ({
+          id: rol.id,
+          rolName: rol.rolName,
+          rolDescripc: rol.rolDescripc,
+          rolFechaCreac: rol.rolFechaCreac,
+          rolFechaModic: rol.rolFechaModic,
+        }));
+        this.totalPages = Math.ceil(this.roles.length / this.itemsPerPage);  // Calcula el número total de páginas
       },
       error => {
-        console.error('Error al cargar los Roles:', error);
+        console.error('Error al cargar los Roles:', error);  // Muestra el error si ocurre
       }
     );
   }
-  exportToExcel() {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Roles');
-    worksheet.columns = [
-      {header: 'ID', key: 'id', width: 10},
-      {header: 'Rol Name', key: 'rolName', width: 30},
-      {header: 'Rol Descripc', key: 'rolDescripc', width: 15},
-      {header: 'Rol FechaCreac', key: 'rolFechaCreac', width: 15},
-      {header: 'Rol FechaModic', key: 'rolFechaModic', width: 15},
 
+  // Exporta los roles a un archivo de Excel
+  exportToExcel() {
+    const workbook = new ExcelJS.Workbook();     // Crea un nuevo archivo Excel
+    const worksheet = workbook.addWorksheet('Roles');  // Añade una hoja al archivo
+    worksheet.columns = [
+      { header: 'ID', key: 'id', width: 10 },
+      { header: 'Rol Name', key: 'rolName', width: 30 },
+      { header: 'Rol Descripc', key: 'rolDescripc', width: 15 },
+      { header: 'Rol FechaCreac', key: 'rolFechaCreac', width: 15 },
+      { header: 'Rol FechaModic', key: 'rolFechaModic', width: 15 },
     ];
+
+    // Añade las filas de los roles al archivo Excel
     this.roles.forEach(rol => {
       worksheet.addRow(rol);
     });
+
+    // Genera y descarga el archivo
     workbook.xlsx.writeBuffer().then(data => {
-      const blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       const url = window.URL.createObjectURL(blob);
       window.open(url);
     });
   }
+
+  // Metodo para ordenar las columnas de la tabla
   sortColumn(columnName: string) {
     if (this.currentColumn === columnName) {
-      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc'; // Alterna el orden si la columna ya está seleccionada
     } else {
       this.currentColumn = columnName;
-      this.sortOrder = 'asc';
+      this.sortOrder = 'asc'; // Orden ascendente por defecto para una nueva columna
     }
     this.sortData();
   }
+
+  // Ordena los datos según la columna y el orden especificado
   sortData() {
     if (this.currentColumn) {
       this.roles.sort((a, b) => {
@@ -166,11 +179,14 @@ export class RolesComponent implements OnInit{
       });
     }
   }
-  //Metodo para Eliminar
-  onEliminarRol(tipoAlojamiento: Rol) {
-    this.rolToDelete = tipoAlojamiento;
-    this.confirmDelete();
+
+  // Metodo para eliminar un rol
+  onEliminarRol(rol: Rol) {
+    this.rolToDelete = rol;       // Establece el rol que se va a eliminar
+    this.confirmDelete();         // Llama al metodo para confirmar la eliminación
   }
+
+  // Muestra un diálogo de confirmación para eliminar el rol
   confirmDelete() {
     if (this.rolToDelete) {
       const tipoId = this.rolToDelete.id;
@@ -185,44 +201,40 @@ export class RolesComponent implements OnInit{
         cancelButtonText: 'Cancelar'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.showAlert = false;
           this.rolesService.eliminarRol(tipoId).subscribe(() => {
-            this.roles = this.roles.filter(p => p.id !== tipoId);
-            this.rolToDelete = null;
-            this.rolEliminado = true; // Mostrar mensaje de eliminación correcta
-            setTimeout(() => {
-              this.rolEliminado = false; // Ocultar el mensaje después de cierto tiempo (por ejemplo, 3 segundos)
-            }, 3000);
+            this.roles = this.roles.filter(p => p.id !== tipoId);  // Filtra los roles y elimina el seleccionado
+            this.rolToDelete = null;                               // Resetea el rol a eliminar
             Swal.fire('¡Eliminado!', 'El Rol ha sido eliminado correctamente.', 'success');
           }, error => {
             console.error('Error al eliminar El Rol:', error);
-            this.errorMessage = 'Hubo un error al eliminar El Rol. Por favor, inténtalo de nuevo más tarde.';
-            setTimeout(() => {
-              this.showAlert = false;
-            }, 8000);
             Swal.fire('Error', 'Hubo un error al eliminar El Rol.', 'error');
           });
         }
       });
     }
   }
+
+  // Realiza la búsqueda filtrando los ítems según el texto ingresado
   performSearch() {
     if (this.searchText.trim() !== '') {
       const searchKeywords = this.searchText.toLowerCase().split(' ').filter(Boolean);
-      this.filteredItems = this.items.filter((item: { rolName: string; }) => {
+      this.filteredItems = this.items.filter((item: { rolName: string }) => {
         const itemText = item.rolName.toLowerCase();
         return searchKeywords.every(keyword => itemText.includes(keyword));
       });
       this.searchNotFound = this.filteredItems.length === 0;
-      this.updateTable();
+      this.updateTable();  // Actualiza la tabla con los resultados filtrados
     } else {
       this.displayedItems = [];
       this.searchNotFound = false;
     }
   }
+
+  // Actualiza la tabla con los ítems filtrados
   updateTable() {
-    this.displayedItems = this.filteredItems;
+    this.displayedItems = this.filteredItems.slice(0, 5);  // Muestra los primeros 5 elementos filtrados
   }
+
   highlightMatches(content: string, keyword: string): string {
     if (!keyword.trim()) return content;
     const regex = new RegExp(keyword, 'gi');
