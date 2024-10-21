@@ -1,84 +1,117 @@
 <div class="container">
+  <!-- Título del módulo -->
   <h2>Módulo para agregar un nuevo Rol</h2>
+
+  <!-- Formulario para crear o editar un rol -->
   <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
-    <!-- inicio nombre -->
+
+    <!-- Inicio del campo 'Nombre del Rol' -->
     <div class="form-group">
       <label for="rolName">Nombre del Rol</label>
       <div class="input-group">
+        <!-- Icono de estado del campo 'Nombre del Rol' -->
         <div class="input-group-prepend">
           <span class="input-group-text">
+            <!-- Icono visible si el campo es válido o no ha sido tocado -->
             <i *ngIf="crearForm.get('rolName')?.valid || !crearForm.get('rolName')?.touched" class="fas fa-user"></i>
+            <!-- Icono visible si el campo es inválido y ha sido tocado -->
             <i *ngIf="crearForm.get('rolName')?.invalid && crearForm.get('rolName')?.touched" class="fas fa-times-circle text-danger"></i>
           </span>
         </div>
+        <!-- Campo de entrada para el nombre del rol -->
         <input type="text" id="rolName" formControlName="rolName" placeholder="Ingresa el Nombre del Rol">
       </div>
+
+      <!-- Mensajes de error si el campo 'rolName' no es válido -->
       <div *ngIf="crearForm.get('rolName')?.invalid && (crearForm.get('rolName')?.dirty || crearForm.get('rolName')?.touched)">
+        <!-- Mensaje si el campo 'rolName' es obligatorio -->
         <div class="text-danger" *ngIf="crearForm.get('rolName')?.errors?.['required']">El Rol es obligatorio.</div>
+        <!-- Mensaje si el campo 'rolName' tiene menos de 5 caracteres -->
         <div class="text-danger" *ngIf="crearForm.get('rolName')?.errors?.['minlength']">El Rol debe tener al menos 5 caracteres.</div>
+        <!-- Mensaje si el campo 'rolName' excede los 50 caracteres -->
         <div class="text-danger" *ngIf="crearForm.get('rolName')?.errors?.['maxlength']">El Rol no debe exceder los 50 caracteres.</div>
       </div>
     </div>
-    <!-- fin nombre -->
+    <!-- Fin del campo 'Nombre del Rol' -->
 
-    <!-- inicio descripción -->
+    <!-- Inicio del campo 'Descripción del Rol' -->
     <div class="form-group">
       <label for="rolDescripc">Descripción del Rol</label>
       <div class="input-group">
+        <!-- Icono de estado del campo 'Descripción del Rol' -->
         <div class="input-group-prepend">
           <span class="input-group-text">
+            <!-- Icono visible si el campo es válido o no ha sido tocado -->
             <i *ngIf="crearForm.get('rolDescripc')?.valid || !crearForm.get('rolDescripc')?.touched" class="fas fa-align-left"></i>
+            <!-- Icono visible si el campo es inválido y ha sido tocado -->
             <i *ngIf="crearForm.get('rolDescripc')?.invalid && crearForm.get('rolDescripc')?.touched" class="fas fa-times-circle text-danger"></i>
           </span>
         </div>
+        <!-- Campo de entrada para la descripción del rol -->
         <textarea id="rolDescripc" formControlName="rolDescripc" placeholder="Ingresa la Descripción del Rol" rows="5" class="form-control"></textarea>
       </div>
+
+      <!-- Mensajes de error si el campo 'rolDescripc' no es válido -->
       <div *ngIf="crearForm.get('rolDescripc')?.invalid && (crearForm.get('rolDescripc')?.dirty || crearForm.get('rolDescripc')?.touched)">
+        <!-- Mensaje si el campo 'rolDescripc' es obligatorio -->
         <div class="text-danger" *ngIf="crearForm.get('rolDescripc')?.errors?.['required']">La descripción es obligatoria.</div>
+        <!-- Mensaje si el campo 'rolDescripc' tiene menos de 10 caracteres -->
         <div class="text-danger" *ngIf="crearForm.get('rolDescripc')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+        <!-- Mensaje si el campo 'rolDescripc' excede los 500 caracteres -->
         <div class="text-danger" *ngIf="crearForm.get('rolDescripc')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
       </div>
     </div>
-    <!-- fin descripción -->
+    <!-- Fin del campo 'Descripción del Rol' -->
 
-    <!-- inicio fecha -->
+    <!-- Inicio de las fechas 'Fecha de Creación' y 'Fecha de Modificación' -->
     <div class="form-group">
       <div class="fecha-evento-container">
-        <!-- Fecha Creación -->
+
+        <!-- Campo 'Fecha de Creación' -->
         <div class="form-group">
           <label for="rolFechaCreac">Fecha de Creación</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">
+                <!-- Icono visible si el campo 'Fecha de Creación' es válido o no ha sido tocado -->
                 <i *ngIf="crearForm.get('rolFechaCreac')?.valid || !crearForm.get('rolFechaCreac')?.touched" class="fas fa-calendar-plus"></i>
+                <!-- Icono visible si el campo 'Fecha de Creación' es inválido y ha sido tocado -->
                 <i *ngIf="crearForm.get('rolFechaCreac')?.invalid && crearForm.get('rolFechaCreac')?.touched" class="fas fa-times-circle text-danger"></i>
               </span>
             </div>
+            <!-- Campo de entrada para la fecha de creación -->
             <input type="date" id="rolFechaCreac" formControlName="rolFechaCreac" class="form-control">
           </div>
         </div>
 
-        <!-- Fecha Modificación -->
+        <!-- Campo 'Fecha de Modificación' -->
         <div class="form-group">
           <label for="rolFechaModic">Fecha Modificación</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">
+                <!-- Icono visible si el campo 'Fecha de Modificación' es válido o no ha sido tocado -->
                 <i *ngIf="crearForm.get('rolFechaModic')?.valid || !crearForm.get('rolFechaModic')?.touched" class="fas fa-calendar-check"></i>
+                <!-- Icono visible si el campo 'Fecha de Modificación' es inválido y ha sido tocado -->
                 <i *ngIf="crearForm.get('rolFechaModic')?.invalid && crearForm.get('rolFechaModic')?.touched" class="fas fa-times-circle text-danger"></i>
               </span>
             </div>
+            <!-- Campo de entrada para la fecha de modificación -->
             <input type="date" id="rolFechaModic" formControlName="rolFechaModic" class="form-control">
           </div>
         </div>
+
       </div>
     </div>
-    <!-- fin fecha -->
+    <!-- Fin de las fechas 'Fecha de Creación' y 'Fecha de Modificación' -->
 
-    <!-- Botones -->
+    <!-- Botones para guardar, limpiar y volver -->
     <div class="form-group">
+      <!-- Botón 'Guardar' para enviar el formulario -->
       <button type="submit" class="custom-btn primary-btn" style="margin-left: 10px;">Guardar</button>
+      <!-- Botón 'Limpiar' para limpiar el formulario -->
       <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar</button>
+      <!-- Botón 'Volver' para regresar al menú anterior -->
       <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
     </div>
   </form>
