@@ -1,55 +1,55 @@
 /* Estilos para el topbar */
 app-navbar-topbar {
-  display: block;
-  padding: 0;
-  background-color: #f8f9fa; /* Color de fondo opcional */
-  border-bottom: 1px solid #ddd; /* Línea inferior opcional */
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+  display: block; /* Hace que el topbar sea un elemento de bloque */
+  padding: 0; /* Elimina el padding por defecto */
+  background-color: #f8f9fa; /* Color de fondo opcional para el topbar */
+  border-bottom: 1px solid #ddd; /* Línea inferior opcional para separar el topbar del contenido */
+  position: fixed; /* Fija el topbar en la parte superior de la ventana */
+  top: 0; /* Posición en la parte superior */
+  width: 100%; /* Ancho completo de la pantalla */
+  z-index: 1000; /* Asegura que el topbar esté por encima de otros elementos */
 }
 
 /* Estilos para el navbar */
 app-nav-bar {
-  display: block;
-  padding: 0;
-  background-color: #e9ecef; /* Color de fondo opcional */
-  border-bottom: 1px solid #ccc; /* Línea inferior opcional */
-  margin-top: auto; /* Ajusta el espacio debajo del topbar */
+  display: block; /* Hace que el navbar sea un elemento de bloque */
+  padding: 0; /* Elimina el padding por defecto */
+  background-color: #e9ecef; /* Color de fondo opcional para el navbar */
+  border-bottom: 1px solid #ccc; /* Línea inferior opcional para separar el navbar del contenido */
+  margin-top: auto; /* Ajusta el espacio debajo del topbar para que se mantenga separado */
 }
 
 /* Estilos para el breadcrumbs */
 .breadcrumbs-content {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333; /* Color de texto opcional */
-  padding: 0.5em;
-  background-color: #f1f1f1; /* Color de fondo opcional */
-  border-radius: 5px; /* Borde redondeado opcional */
-  border: 1px solid #ccc; /* Borde opcional */
-  position: fixed;
+  font-size: 1.2em; /* Aumenta el tamaño de la fuente */
+  font-weight: bold; /* Hace que el texto sea negrita */
+  color: #333; /* Color de texto opcional para mejor legibilidad */
+  padding: 0.5em; /* Espaciado interno */
+  background-color: #f1f1f1; /* Color de fondo opcional para el breadcrumbs */
+  border-radius: 5px; /* Bordes redondeados opcionales para un efecto más suave */
+  border: 1px solid #ccc; /* Borde opcional para definir el contorno */
+  position: fixed; /* Fija el breadcrumbs en la ventana */
   top: 4em; /* Ajusta la posición para dejar espacio para el topbar */
   width: 100%; /* Establece el ancho al 100% */
-  z-index: 1001; /* Asegura que esté por encima del footer */
+  z-index: 1001; /* Asegura que el breadcrumbs esté por encima del footer */
 }
 
 /* Estilos para el footer */
 #app-footer {
-  display: none; /* Por defecto oculto */
-  padding: 0;
-  background-color: #454343; /* Color de fondo opcional */
-  border-top: 1px solid #ddd; /* Línea superior opcional */
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+  display: none; /* Por defecto, el footer está oculto */
+  padding: 0; /* Elimina el padding por defecto */
+  background-color: #454343; /* Color de fondo opcional para el footer */
+  border-top: 1px solid #ddd; /* Línea superior opcional para separar el footer del contenido */
+  position: fixed; /* Fija el footer en la parte inferior de la ventana */
+  bottom: 0; /* Posición en la parte inferior */
+  width: 100%; /* Ancho completo de la pantalla */
+  z-index: 1000; /* Asegura que el footer esté por encima de otros elementos */
 }
-
 
 /* Estilos para el contenido principal */
 .main-content {
-  padding: 2em;
+  padding: 2em; /* Espaciado interno para el contenido */
   margin-top: 8em; /* Ajusta el espacio para el topbar y el navbar */
   margin-bottom: 1em; /* Ajusta el espacio para el footer */
 }
+
