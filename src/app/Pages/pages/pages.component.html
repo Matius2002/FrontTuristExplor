@@ -1,13 +1,24 @@
+<!-- Sección comentada para el topbar, que se puede habilitar si es necesario -->
 <!-- <app-navbar-topbar></app-navbar-topbar> -->
+
+<!-- Componente de navegación principal -->
 <app-nav-bar></app-nav-bar>
 
+<!-- Contenedor principal para el contenido dinámico de la aplicación -->
 <div class="main-content">
-  <!--   <app-breadcrumbs></app-breadcrumbs> -->
+  <!-- Sección comentada para las migas de pan (breadcrumbs), útil para la navegación -->
+  <!-- <app-breadcrumbs></app-breadcrumbs> -->
 
-  <!-- Aquí irá el contenido dinámico de tu aplicación -->
+  <!-- Aquí se inserta el contenido dinámico de tu aplicación, gestionado por el enrutador de Angular -->
   <router-outlet></router-outlet>
 </div>
+
+<!-- Sección comentada para el footer, que se puede habilitar si es necesario -->
 <!-- <app-footer></app-footer> -->
 
+<!-- Componente de pie de página (footer) siempre visible -->
 <app-footer></app-footer>
+
+<!-- Componente para el botón de volver arriba, que permite a los usuarios regresar rápidamente al inicio de la página -->
 <app-volver-arriba></app-volver-arriba>
+
