@@ -1,25 +1,39 @@
+<!-- Encabezado de la tarjeta -->
 <div class="card-header">
   <br>
+  <!-- Título de la tarjeta centrado con estilo en negrita y color primario -->
   <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Usuario</h3>
+
+  <!-- Buscador para filtrar los usuarios -->
   <div class="buscador">
+    <!-- Input para la búsqueda, enlazado a searchText a través de ngModel y ejecuta performSearch() al escribir -->
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
+    <!-- Icono de búsqueda -->
     <i class="fas fa-search"></i>
   </div>
   <br>
+
+  <!-- Herramientas de la tarjeta, centradas horizontalmente -->
   <div class="card-tools d-flex justify-content-center">
+    <!-- Grupo de botones con diferentes acciones -->
     <div class="btn-group" role="group">
+      <!-- Botón para regresar a la vista anterior (navegando a 'sistemas') -->
       <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
-        <i class="fas fa-home"></i><span>Regresar</span>
+        <i class="fas fa-home"></i><span> Regresar</span>
       </button>
+      <!-- Botón para recargar la tabla -->
       <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
         <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
       </button>
+      <!-- Botón para agregar un nuevo usuario -->
       <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoUsers()">
         <i class="fas fa-plus"></i><span> Nuevo Usuario</span>
       </button>
+      <!-- Botón para exportar la tabla a Excel -->
       <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
         <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
       </button>
+      <!-- Botón para imprimir la tabla -->
       <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
         <i class="fas fa-print"></i><span> Imprimir</span>
       </button>
@@ -27,13 +41,17 @@
   </div>
 </div>
 
-<!-- Inicio tabla -->
+<!-- Contenido de la tarjeta: tabla con los datos de usuarios -->
 <div class="card-body table-responsive">
+  <!-- Tabla con bordes y formato -->
   <table id="printable-table" class="table table-bordered table-striped">
+    <!-- Cabecera de la tabla -->
     <thead>
     <tr class="text-center">
+      <!-- Columnas con capacidad de ordenar al hacer clic -->
       <th (click)="sortColumn('id')">
         ID
+        <!-- Icono que indica el estado de orden actual (ascendente o descendente) -->
         <span *ngIf="currentColumn === 'id'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
@@ -68,23 +86,25 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+      <!-- Columna para las acciones -->
       <th>Acciones</th>
     </tr>
     </thead>
+
+    <!-- Cuerpo de la tabla con los datos de los usuarios -->
     <tbody>
+    <!-- Itera sobre los usuarios filtrados por searchText y paginados -->
     <tr *ngFor="let usuario of usuarios | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
+      <!-- Muestra la información de cada usuario -->
       <td class="text-center">{{ usuario.id }}</td>
+      <!-- Resalta las coincidencias de búsqueda en el nombre -->
       <td [innerHTML]="highlightMatches(usuario.nombreUsuario, searchText)"></td>
       <td>{{ usuario.email }}</td>
       <td>{{ usuario.password }}</td>
       <td>{{ usuario.rol?.rolName }}</td>
       <td>{{ usuario.fechaRegistro }}</td>
       <td class="d-flex justify-content-center align-items-center">
-        <!--
-        <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(usuario)">
-          <i class="fas fa-edit"></i>
-        </button>
-        -->
+        <!-- Botón para eliminar al usuario -->
         <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarUsuario(usuario)">
           <i class="fas fa-trash"></i>
         </button>
@@ -92,6 +112,8 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- Controles de paginación -->
   <pagination-controls
     (pageChange)="page = $event"
     previousLabel="Anterior"
@@ -103,8 +125,11 @@
     size="sm">
   </pagination-controls>
 
+  <!-- Botones para navegar a la primera o última página -->
   <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
   <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+
+  <!-- Información sobre la paginación -->
   <div class="pagination-info">
     <p>Total de elementos: {{ (usuarios | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
     <p>Total de páginas: {{ Math.ceil(usuarios.length / 5) }}</p>
