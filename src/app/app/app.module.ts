@@ -5,16 +5,12 @@ import {HttpClientModule, provideHttpClient} from "@angular/common/http";
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule, // Módulo necesario para ejecutar la aplicación en un navegador
     AppComponent,
-    HttpClientModule
-
+    HttpClientModule // Módulo que permite hacer solicitudes HTTP
   ],
-  declarations: [
-
-
-  ],
-  providers: [provideHttpClient()],
-  bootstrap: [  ]
+  declarations: [],
+  providers: [provideHttpClient()], // Provee el cliente HTTP para la inyección de dependencias
+  bootstrap: []
 })
-export class AppModule {}
+export class AppModule {} // Exporta la clase AppModule para que pueda ser utilizada en otros módulos o componentes
