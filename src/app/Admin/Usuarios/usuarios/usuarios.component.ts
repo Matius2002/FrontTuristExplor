@@ -96,7 +96,7 @@ export class UsuariosComponent implements OnInit {
     private router: Router,
   ) {}
 
-  // Método que se ejecuta al inicializar el componente
+  // Metodo que se ejecuta al inicializar el componente
   ngOnInit(): void {
     this.cargarUsuarios(); // Cargar usuarios al inicio
   }
