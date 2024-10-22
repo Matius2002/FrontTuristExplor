@@ -1,19 +1,23 @@
-
 <div class="container user-registration-form">
+  <!-- Imagen de fondo para el formulario -->
   <img src="assets/images/bandera.png" alt="Imagen de fondo" class="background-image">
-  <h2>Registrate en TuristExplor</h2>
+
+  <h2>Regístrate en TuristExplor</h2> <!-- Título del formulario -->
+
+  <!-- Formulario de registro -->
   <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
-    <!-- inicio nombre -->
+
+    <!-- Inicio del campo Nombre Completo -->
     <div class="form-group">
       <label for="nombreUsuario">Nombre Completo</label>
       <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text">
-          <i *ngIf="crearForm.get('nombreUsuario')?.valid || !crearForm.get('nombreUsuario')?.touched" class="fas fa-user"></i>
-          <i *ngIf="crearForm.get('nombreUsuario')?.invalid && crearForm.get('nombreUsuario')?.touched" class="fas fa-times-circle text-danger"></i>
-        </span>
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('nombreUsuario')?.valid || !crearForm.get('nombreUsuario')?.touched" class="fas fa-user"></i>
+            <i *ngIf="crearForm.get('nombreUsuario')?.invalid && crearForm.get('nombreUsuario')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
         </div>
-        <input type="text" id="nombreUsuario" formControlName="nombreUsuario" placeholder="Ingresa el Nombre Completo">
+        <input type="text" id="nombreUsuario" formControlName="nombreUsuario" placeholder="Ingresa el Nombre Completo" class="form-control">
       </div>
       <div *ngIf="crearForm.get('nombreUsuario')?.invalid && (crearForm.get('nombreUsuario')?.dirty || crearForm.get('nombreUsuario')?.touched)">
         <div class="text-danger" *ngIf="crearForm.get('nombreUsuario')?.errors?.['required']">El Nombre es obligatorio.</div>
@@ -21,16 +25,17 @@
         <div class="text-danger" *ngIf="crearForm.get('nombreUsuario')?.errors?.['maxlength']">El Nombre no debe exceder los 50 caracteres.</div>
       </div>
     </div>
-    <!-- fin nombre -->
-    <!-- inicio correo electrónico -->
+    <!-- Fin del campo Nombre Completo -->
+
+    <!-- Inicio del campo Correo Electrónico -->
     <div class="form-group">
       <label for="email">Correo Electrónico</label>
       <div class="input-group">
         <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i *ngIf="crearForm.get('email')?.valid || !crearForm.get('email')?.touched" class="fas fa-envelope"></i>
-        <i *ngIf="crearForm.get('email')?.invalid && crearForm.get('email')?.touched" class="fas fa-times-circle text-danger"></i>
-      </span>
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('email')?.valid || !crearForm.get('email')?.touched" class="fas fa-envelope"></i>
+            <i *ngIf="crearForm.get('email')?.invalid && crearForm.get('email')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
         </div>
         <input type="email" id="email" formControlName="email" placeholder="Ingresa tu Correo Electrónico" class="form-control">
       </div>
@@ -39,16 +44,17 @@
         <div class="text-danger" *ngIf="crearForm.get('email')?.errors?.['email']">Ingresa un correo electrónico válido.</div>
       </div>
     </div>
-    <!-- fin correo electrónico -->
+    <!-- Fin del campo Correo Electrónico -->
 
+    <!-- Inicio del campo Contraseña -->
     <div class="form-group">
       <label for="password">Contraseña</label>
       <div class="input-group">
         <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i *ngIf="crearForm.get('password')?.valid || !crearForm.get('password')?.touched" class="fas fa-lock"></i>
-        <i *ngIf="crearForm.get('password')?.invalid && crearForm.get('password')?.touched" class="fas fa-times-circle text-danger"></i>
-      </span>
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('password')?.valid || !crearForm.get('password')?.touched" class="fas fa-lock"></i>
+            <i *ngIf="crearForm.get('password')?.invalid && crearForm.get('password')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
         </div>
         <input formControlName="password" type="password" class="form-control" id="password" placeholder="Ingrese su Contraseña">
       </div>
@@ -60,18 +66,19 @@
         <div class="text-danger" *ngIf="tooShort && crearForm.get('password')?.touched">Debe tener al menos 10 caracteres.</div>
       </div>
     </div>
+    <!-- Fin del campo Contraseña -->
 
-    <!-- inicio rol -->
+    <!-- Inicio del campo Rol -->
     <div class="form-group">
       <label for="rol">Rol</label>
       <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text">
-          <i *ngIf="crearForm.get('rol')?.valid || !crearForm.get('rol')?.touched" class="fas fa-user-tag"></i>
-          <i *ngIf="crearForm.get('rol')?.invalid && crearForm.get('rol')?.touched" class="fas fa-times-circle text-danger"></i>
-        </span>
+          <span class="input-group-text">
+            <i *ngIf="crearForm.get('rol')?.valid || !crearForm.get('rol')?.touched" class="fas fa-user-tag"></i>
+            <i *ngIf="crearForm.get('rol')?.invalid && crearForm.get('rol')?.touched" class="fas fa-times-circle text-danger"></i>
+          </span>
         </div>
-        <select id="rol" formControlName="rol">
+        <select id="rol" formControlName="rol" class="form-control">
           <option value="" disabled selected>Seleccione un Rol</option>
           <option *ngFor="let rol of roles" [value]="rol.rolName">{{ rol.rolName }}</option>
         </select>
@@ -80,30 +87,34 @@
         <div class="text-danger" *ngIf="crearForm.get('rol')?.errors?.['required']">El Rol es obligatorio.</div>
       </div>
     </div>
-    <!-- fin rol -->
-    <!-- inicio código de confirmación -->
+    <!-- Fin del campo Rol -->
+
+    <!-- Inicio del campo Código de Confirmación -->
     <div class="form-group" *ngIf="crearForm.get('rol')?.value === 'ADMINISTRADOR'">
       <label for="codigoConfirmacion">Código de Confirmación</label>
       <div class="input-group">
         <div class="input-group-prepend">
-        <span class="input-group-text">
-          <i *ngIf="!codigoIncorrecto" class="fas fa-lock"></i>
-          <i *ngIf="codigoIncorrecto" class="fas fa-times-circle text-danger"></i>
-        </span>
+          <span class="input-group-text">
+            <i *ngIf="!codigoIncorrecto" class="fas fa-lock"></i>
+            <i *ngIf="codigoIncorrecto" class="fas fa-times-circle text-danger"></i>
+          </span>
         </div>
-        <input type="text" id="codigoConfirmacion" formControlName="codigoConfirmacion" placeholder="Ingrese el código de confirmación">
+        <input type="text" id="codigoConfirmacion" formControlName="codigoConfirmacion" placeholder="Ingrese el código de confirmación" class="form-control">
       </div>
       <div *ngIf="codigoIncorrecto">
         <div class="text-danger">El código de confirmación es incorrecto.</div>
       </div>
     </div>
+    <!-- Fin del campo Código de Confirmación -->
 
-    <!-- Botones -->
+    <!-- Botones del formulario -->
     <div class="form-group">
-      <button type="submit" class="custom-btn primary-btn"style="margin-left: 10px;" >Registrarse</button>
+      <button type="submit" class="custom-btn primary-btn" style="margin-left: 10px;">Registrarse</button>
       <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar</button>
       <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
     </div>
+
+    <!-- Enlace para volver a la página de inicio de sesión -->
     <div class="form-group" style="margin-top: 10px;">
       <a class="custom-link" (click)="goToLogin()">¿Ya tienes una cuenta? Inicia sesión</a>
     </div>
