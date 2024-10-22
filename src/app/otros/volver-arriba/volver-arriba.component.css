@@ -1,44 +1,47 @@
 /* volver-arriba.component.css */
-.volver-arriba {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: opacity 0.3s, visibility 0.3s, transform 0.5s cubic-bezier(0.42, 0, 0.58, 1);
 
+/* Estilos para el botón "Volver Arriba" */
+.volver-arriba {
+  position: fixed; /* Fija el botón en la pantalla */
+  bottom: 40px; /* Espaciado desde la parte inferior de la ventana */
+  right: 40px; /* Espaciado desde el lado derecho de la ventana */
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  border-radius: 5px; /* Bordes redondeados del botón */
+  cursor: pointer; /* Cambia el cursor a mano al pasar sobre el botón */
+  transition: opacity 0.3s, visibility 0.3s, transform 0.5s cubic-bezier(0.42, 0, 0.58, 1); /* Transiciones suaves para efectos visuales */
 }
 
+/* Efecto de hover y active para el botón */
 .volver-arriba:hover,
 .volver-arriba:active {
-  background-color: #0056b3; /* Cambia el color al pasar el mouse o al hacer clic */
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse o al hacer clic */
 }
 
+/* Media query para dispositivos con un ancho máximo de 600px */
 @media screen and (max-width: 600px) {
   .volver-arriba {
-    bottom: 20px;
-    right: 20px;
+    bottom: 20px; /* Reduce el espaciado desde la parte inferior */
+    right: 20px; /* Reduce el espaciado desde el lado derecho */
   }
 }
 
-/* Definimos la animación */
+/* Definimos la animación para el botón "Volver Arriba" */
 @keyframes aparecer {
   0% {
-    transform: translateY(100%);
+    transform: translateY(100%); /* Comienza fuera de la pantalla (abajo) */
   }
   25% {
-    transform: translateY(-20%); /* Iniciamos suave */
+    transform: translateY(-20%); /* Se mueve un poco hacia arriba para un efecto de suavidad */
   }
   100% {
-    transform: translateY(0);
+    transform: translateY(0); /* Se mueve a su posición final (en la pantalla) */
   }
 }
 
 /* Aplicamos la animación cuando el botón esté visible */
 .volver-arriba.visible {
-  animation: aparecer 0.5s forwards;
+  animation: aparecer 0.5s forwards; /* Aplica la animación "aparecer" por 0.5 segundos */
 }
