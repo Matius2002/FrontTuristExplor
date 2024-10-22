@@ -1,4 +1,8 @@
 <!-- volver-arriba.component.html -->
+
+<!-- Botón que aparece solo si la variable windowScrolled es verdadera -->
 <button *ngIf="windowScrolled" class="volver-arriba" (click)="scrollToTop()">
+  <!-- Icono de flecha hacia arriba usando Font Awesome -->
   <i class="fa fa-arrow-circle-up"></i>
 </button>
+
