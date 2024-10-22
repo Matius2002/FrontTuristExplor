@@ -1,31 +1,34 @@
-
+/* Estilos del formulario de registro de usuario */
 .user-registration-form {
-  background-color: #bedcf8;
-  color: #333;
-  padding: 20px;
-  border-radius: 10px;
-  position: relative;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 0; /* Asegura que el contenedor tenga un z-index mayor que la imagen de fondo */
+  background-color: #bedcf8;  /* Color de fondo del formulario */
+  color: #333;  /* Color del texto dentro del formulario */
+  padding: 20px;  /* Espacio interno del formulario (relleno) */
+  border-radius: 10px;  /* Bordes redondeados para darle un aspecto suave */
+  position: relative;  /* Posiciona el contenedor de manera relativa, necesario para la imagen de fondo */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Sombra ligera alrededor del formulario */
+  overflow: hidden;  /* Asegura que los elementos dentro del contenedor no se desborden */
+  z-index: 0;  /* Asegura que el formulario esté por encima de la imagen de fondo */
 }
 
+/* Estilos de la imagen de fondo dentro del formulario */
 .background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-  z-index: -1;
+  position: absolute;  /* Posiciona la imagen de fondo en relación con el contenedor padre */
+  top: 0;  /* Posiciona la imagen en la parte superior del contenedor */
+  left: 0;  /* Posiciona la imagen en la parte izquierda del contenedor */
+  width: 100%;  /* Asegura que la imagen cubra todo el ancho del contenedor */
+  height: 100%;  /* Asegura que la imagen cubra toda la altura del contenedor */
+  object-fit: cover;  /* Escala la imagen para que cubra el área sin deformarse */
+  opacity: 0.3;  /* Hace que la imagen sea semitransparente para no interferir con el contenido */
+  z-index: -1;  /* Coloca la imagen detrás del contenido del formulario */
 }
+
+/* Estilos para enlaces personalizados dentro del formulario */
 .custom-link {
-  color: #007bff;
-  text-decoration: none;
-  cursor: pointer;
+  color: #007bff;  /* Color del enlace personalizado */
+  text-decoration: none;  /* Elimina el subrayado predeterminado del enlace */
+  cursor: pointer;  /* Cambia el cursor cuando el usuario pasa el mouse sobre el enlace */
 }
 
 .custom-link:hover {
-  text-decoration: underline;
+  text-decoration: underline;  /* Subraya el enlace cuando el usuario lo pasa por encima */
 }
