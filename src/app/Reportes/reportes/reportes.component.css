@@ -2,55 +2,57 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f3e6e8;
+  background-color: #f3e6e8; /* Fondo rosado claro */
 }
 
 .report-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #fff; /* Fondo blanco */
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
+/* Estilos para la cabecera */
 .header {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Estilos para contenedor de imagen */
 .image-container {
   position: relative;
-  text-align: center;
+  text-align: center; /* Centrar contenido */
 }
 
 .image-container img {
   width: 100%;
-  max-width: 600px; /* Limitar el tamaño máximo de la imagen */
+  max-width: 600px; /* Limitar tamaño de imagen */
   border-radius: 8px;
   display: block;
-  margin: 0 auto; /* Centrar la imagen horizontalmente */
+  margin: 0 auto; /* Centrar imagen */
 }
 
 .image-container h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Centrando texto */
   color: white;
   font-size: 2.5em;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra en el texto */
 }
 
 /* Botones */
 .buttons-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 15px; /* Separación entre botones */
 }
 
 .report-button, .back-button {
-  background-color: #007bff;
+  background-color: #007bff; /* Color azul del botón */
   color: white;
   border: none;
   padding: 15px 20px;
@@ -59,20 +61,20 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Centrar el contenido dentro del botón */
 }
 
 .report-button i, .back-button i {
-  margin-right: 10px;
+  margin-right: 10px; /* Separación entre el ícono y el texto */
 }
 
 .report-button:hover, .back-button:hover {
-  background-color: #09bffa;
+  background-color: #09bffa; /* Cambio de color en hover */
 }
 
-/* Modal */
+/* Estilos para el modal */
 .modal {
-  display: none;
+  display: none; /* Inicialmente oculto */
   position: fixed;
   z-index: 1;
   left: 0;
@@ -80,26 +82,27 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro semitransparente */
 }
 
 .modal.show {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Centrar el modal */
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: #fefefe; /* Fondo blanco del modal */
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  max-width: 600px;
+  max-width: 600px; /* Limitar el tamaño máximo del modal */
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra del modal */
   position: relative;
 }
 
+/* Botón de cierre del modal */
 .close {
   color: #aaa;
   position: absolute;
@@ -136,10 +139,10 @@ body {
   margin-right: 5px;
 }
 
-/* Media queries */
+/* Media queries para pantallas más pequeñas */
 @media (max-width: 768px) {
   .modal-content {
-    width: 90%;
+    width: 90%; /* Ajuste de ancho para pantallas pequeñas */
     padding: 15px;
   }
 
@@ -149,6 +152,6 @@ body {
   }
 
   .image-container h1 {
-    font-size: 2em;
+    font-size: 2em; /* Reducción de tamaño del texto en pantallas pequeñas */
   }
 }
