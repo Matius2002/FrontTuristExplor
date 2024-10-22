@@ -1,80 +1,81 @@
+/* Contenedor principal del mapa */
 .map-container {
-  position: relative;
-  width: 100%;
-  height: 75vh; /* Ajustar la altura al 75% del viewport */
+  position: relative; /* Posicionamiento relativo para permitir posicionamiento absoluto de elementos hijos */
+  width: 100%; /* Ancho completo del contenedor */
+  height: 75vh; /* Ajustar la altura al 75% de la altura del viewport */
 }
 
 /* Campo de búsqueda */
 #pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 16px; /* Reducido para móviles */
-  font-weight: 300;
-  padding: 5px 15px;
-  width: 80%; /* Ajustable para dispositivos pequeños */
-  max-width: 300px;
-  position: absolute;
-  top: 15px;
-  left: 200px;
-  z-index: 5;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff; /* Color de fondo blanco */
+  font-family: Roboto; /* Fuente utilizada para el campo de búsqueda */
+  font-size: 16px; /* Tamaño de la fuente; reducido para móviles */
+  font-weight: 300; /* Grosor de la fuente */
+  padding: 5px 15px; /* Espaciado interno del campo de búsqueda */
+  width: 80%; /* Ancho ajustable para dispositivos pequeños */
+  max-width: 300px; /* Ancho máximo del campo de búsqueda */
+  position: absolute; /* Posicionamiento absoluto dentro del contenedor padre */
+  top: 15px; /* Distancia desde la parte superior del contenedor */
+  left: 200px; /* Distancia desde la izquierda del contenedor */
+  z-index: 5; /* Asegurar que el campo de búsqueda esté por encima de otros elementos */
+  border-radius: 4px; /* Bordes redondeados del campo de búsqueda */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
 }
 
 /* Contenedor del mapa */
 #map {
-  height: 100%;
-  width: 100%;
+  height: 100%; /* Altura del mapa ocupa el 100% de su contenedor */
+  width: 100%; /* Ancho del mapa ocupa el 100% de su contenedor */
 }
 
 /* Botones de categorías */
 .category-buttons {
-  position: absolute;
-  top: 60px;
-  left: 10px;
-  z-index: 5;
-  display: flex;
+  position: absolute; /* Posicionamiento absoluto para que floten sobre el mapa */
+  top: 60px; /* Distancia desde la parte superior del contenedor */
+  left: 10px; /* Distancia desde la izquierda del contenedor */
+  z-index: 5; /* Asegurar que los botones estén por encima de otros elementos */
+  display: flex; /* Usar flexbox para organizar los botones */
   flex-wrap: wrap; /* Permitir que los botones se ajusten en varias líneas en pantallas pequeñas */
-  gap: 10px;
+  gap: 10px; /* Espacio entre los botones */
 }
 
 .category-buttons button {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 12px; /* Ajuste del tamaño del texto */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #fff; /* Color de fondo blanco para los botones */
+  border: 1px solid #ccc; /* Bordes con color gris claro */
+  border-radius: 20px; /* Bordes redondeados de los botones */
+  padding: 5px 10px; /* Espaciado interno de los botones */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  font-size: 12px; /* Ajuste del tamaño del texto de los botones */
+  display: flex; /* Usar flexbox para centrar contenido dentro del botón */
+  align-items: center; /* Centrar verticalmente el contenido */
+  justify-content: center; /* Centrar horizontalmente el contenido */
 }
 
 .category-buttons button:hover {
-  background-color: #eee;
+  background-color: #eee; /* Cambiar color de fondo al pasar el ratón */
 }
 
 .category-buttons button:focus {
-  outline: none;
-  background-color: #ddd;
+  outline: none; /* Eliminar el contorno de enfoque por defecto */
+  background-color: #ddd; /* Cambiar color de fondo cuando el botón está en foco */
 }
 
 /* Estilos para pantallas pequeñas (móviles) */
 @media (max-width: 768px) {
   #pac-input {
-    width: 90%;
-    top: 10px;
-    left: 5px;
+    width: 90%; /* Aumentar el ancho del campo de búsqueda en dispositivos pequeños */
+    top: 10px; /* Ajustar la posición superior del campo de búsqueda */
+    left: 5px; /* Ajustar la posición izquierda del campo de búsqueda */
   }
 
   .category-buttons {
-    top: 50px;
-    left: 5px;
+    top: 50px; /* Ajustar la posición superior del contenedor de botones */
+    left: 5px; /* Ajustar la posición izquierda del contenedor de botones */
     flex-direction: column; /* Alinear los botones en columna en pantallas pequeñas */
   }
 
   .category-buttons button {
-    width: 100%; /* Que los botones ocupen todo el ancho disponible */
-    font-size: 14px;
+    width: 100%; /* Hacer que los botones ocupen todo el ancho disponible */
+    font-size: 14px; /* Ajustar el tamaño de la fuente en botones para pantallas pequeñas */
   }
 }
