@@ -1,28 +1,34 @@
 <div class="card-header">
-  <!-- <button class="boton-ayuda" (click)="toggleHelpModal()">
-    <i class="fas fa-question-circle"></i> Ayuda
-  </button> -->
   <br>
+  <!-- Título de la sección de gestión de eventos -->
   <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Eventos</h3>
+
+  <!-- Campo de búsqueda -->
   <div class="buscador">
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search"></i> <!-- Icono de búsqueda -->
   </div>
+
   <br>
   <div class="card-tools d-flex justify-content-center">
     <div class="btn-group" role="group">
+      <!-- Botón para regresar -->
       <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
         <i class="fas fa-home"></i><span>Regresar</span>
       </button>
+      <!-- Botón para recargar la tabla -->
       <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
         <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
       </button>
+      <!-- Botón para agregar un nuevo evento -->
       <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoEvento()">
         <i class="fas fa-plus"></i><span> Nuevo Evento</span>
       </button>
+      <!-- Botón para exportar a Excel -->
       <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
         <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
       </button>
+      <!-- Botón para imprimir la tabla -->
       <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
         <i class="fas fa-print"></i><span> Imprimir</span>
       </button>
@@ -35,6 +41,7 @@
   <table id="printable-table" class="table table-bordered table-striped">
     <thead>
     <tr class="text-center">
+      <!-- Encabezados de la tabla con ordenamiento -->
       <th (click)="sortColumn('id')">
         ID
         <span *ngIf="currentColumn === 'id'" class="sorting-icon">
@@ -85,10 +92,11 @@
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <th>Acciones</th>
+      <th>Acciones</th> <!-- Columna de acciones -->
     </tr>
     </thead>
     <tbody>
+    <!-- Filas de la tabla generadas dinámicamente -->
     <tr *ngFor="let evento of eventos | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
       <td class="text-center">{{ evento.id }}</td>
       <td [innerHTML]="highlightMatches(evento.nombre, searchText)"></td>
@@ -97,15 +105,15 @@
       <td>{{ evento.fechaFin }}</td>
       <td>{{ evento.ubicacion }}</td>
       <td>{{ evento.costoEntrada }}</td>
-      <td>{{ evento.tipoTurismo?.nombre }}</td>
+      <td>{{ evento.tipoTurismo?.nombre }}</td> <!-- Muestra el nombre del tipo de turismo -->
 
-
-      <!-- ayudame no me quiere cargar evento.tipoTurismo?.nombre revisa si todo esta bien  -->
-
+      <!-- Ayuda: revisar si evento.tipoTurismo?.nombre se carga correctamente -->
       <td class="d-flex justify-content-center align-items-center">
+        <!-- Botón para editar evento -->
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(evento)">
           <i class="fas fa-edit"></i>
         </button>
+        <!-- Botón para eliminar evento -->
         <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarEvento(evento)">
           <i class="fas fa-trash"></i>
         </button>
@@ -113,6 +121,8 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- Controles de paginación -->
   <pagination-controls
     (pageChange)="page = $event"
     previousLabel="Anterior"
@@ -124,8 +134,11 @@
     size="sm">
   </pagination-controls>
 
+  <!-- Botones para ir a la primera y última página -->
   <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
   <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+
+  <!-- Información de la paginación -->
   <div class="pagination-info">
     <p>Total de elementos: {{ (eventos | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
     <p>Total de páginas: {{ Math.ceil(eventos.length / 5) }}</p>
