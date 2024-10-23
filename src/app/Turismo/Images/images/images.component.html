@@ -1,26 +1,38 @@
+<!-- Encabezado de la tarjeta -->
 <div class="card-header">
   <br>
-
+  <!-- Título de la sección -->
   <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Imagenes Turisticas</h3>
+
+  <!-- Barra de búsqueda -->
   <div class="buscador">
+    <!-- Campo de entrada para buscar imágenes -->
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search"></i> <!-- Icono de búsqueda -->
   </div>
+
   <br>
+
+  <!-- Herramientas de la tarjeta -->
   <div class="card-tools d-flex justify-content-center">
     <div class="btn-group" role="group">
+      <!-- Botón para regresar -->
       <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
         <i class="fas fa-home"></i><span>Regresar</span>
       </button>
+      <!-- Botón para recargar la tabla -->
       <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
         <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
       </button>
+      <!-- Botón para añadir nueva imagen -->
       <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoImagen()">
         <i class="fas fa-plus"></i><span> Nuevo Imagen</span>
       </button>
+      <!-- Botón para exportar a Excel -->
       <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
         <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
       </button>
+      <!-- Botón para imprimir -->
       <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
         <i class="fas fa-print"></i><span> Imprimir</span>
       </button>
@@ -28,48 +40,55 @@
   </div>
 </div>
 
-<!-- Inicio tabla -->
+<!-- Inicio de la tabla -->
 <div class="card-body table-responsive">
   <table id="printable-table" class="table table-bordered table-striped">
     <thead>
     <tr class="text-center">
+      <!-- Encabezado de ID, con opción de ordenación -->
       <th (click)="sortColumn('id')">
         ID
         <span *ngIf="currentColumn === 'id'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
+      <!-- Encabezado de Nombre, con opción de ordenación -->
       <th (click)="sortColumn('nombre')">
         Nombre
         <span *ngIf="currentColumn === 'nombre'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
+      <!-- Encabezado de Ruta, con opción de ordenación -->
       <th (click)="sortColumn('ruta')">
         Ruta
         <span *ngIf="currentColumn === 'ruta'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
+      <!-- Encabezado de Activa, con opción de ordenación -->
       <th (click)="sortColumn('activa')">
         Activa
         <span *ngIf="currentColumn === 'activa'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
-      <th>Acciones</th>
+      <th>Acciones</th> <!-- Encabezado para acciones -->
     </tr>
     </thead>
     <tbody>
+    <!-- Filas de la tabla, iterando sobre las imágenes filtradas y paginadas -->
     <tr *ngFor="let image of images | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
-      <td class="text-center">{{ image.id }}</td>
-      <td [innerHTML]="highlightMatches(image.nombre, searchText)"></td>
-      <td>{{ image.ruta }}</td>
-      <td>{{ image.activa }}</td>
+      <td class="text-center">{{ image.id }}</td> <!-- ID de la imagen -->
+      <td [innerHTML]="highlightMatches(image.nombre, searchText)"></td> <!-- Nombre con coincidencias resaltadas -->
+      <td>{{ image.ruta }}</td> <!-- Ruta de la imagen -->
+      <td>{{ image.activa }}</td> <!-- Estado de la imagen -->
       <td class="d-flex justify-content-center align-items-center">
+        <!-- Botón para actualizar la imagen -->
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(image)">
           <i class="fas fa-edit"></i>
         </button>
+        <!-- Botón para eliminar la imagen -->
         <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarImagen(image)">
           <i class="fas fa-trash"></i>
         </button>
@@ -77,6 +96,8 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- Controles de paginación -->
   <pagination-controls
     (pageChange)="page = $event"
     previousLabel="Anterior"
@@ -88,10 +109,14 @@
     size="sm">
   </pagination-controls>
 
+  <!-- Botón para ir a la primera página -->
   <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
+
+  <!-- Botón para ir a la última página -->
   <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+
   <div class="pagination-info">
-    <p>Total de elementos: {{ (images | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
-    <p>Total de páginas: {{ Math.ceil(images.length / 5) }}</p>
+    <p>Total de elementos: {{ (images | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p> <!-- Total de elementos en la página -->
+    <p>Total de páginas: {{ Math.ceil(images.length / 5) }}</p> <!-- Total de páginas -->
   </div>
 </div>
