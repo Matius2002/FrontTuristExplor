@@ -1,60 +1,70 @@
+/* Contenedor para la fecha del evento */
 .fecha-evento-container {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* Utiliza flexbox para alinear elementos */
+  justify-content: space-between; /* Espacio entre elementos dentro del contenedor */
   gap: 20px; /* Espacio entre los dos elementos */
 }
 
+/* Grupo de formulario dentro del contenedor de fecha del evento */
 .fecha-evento-container .form-group {
   flex: 1; /* Asegura que ambos elementos ocupen el mismo espacio */
 }
 
+/* Estilos para el texto del grupo de entrada, centrado vertical y horizontalmente */
 .input-group-prepend .input-group-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; /* Utiliza flexbox para alinear */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
 }
 
+/* Grupo de entrada para elementos de formulario */
 .input-group {
-  display: flex;
-  align-items: center;
+  display: flex; /* Utiliza flexbox para alinear elementos */
+  align-items: center; /* Centra verticalmente los elementos dentro del grupo */
 }
 
+/* Contenedor para la fecha y hora del evento */
 .fecha-hora-evento-container {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* Utiliza flexbox para alinear elementos */
+  justify-content: space-between; /* Espacio entre los elementos */
   gap: 20px; /* Espacio entre los elementos */
 }
 
+/* Grupo de formulario dentro del contenedor de fecha y hora del evento */
 .fecha-hora-evento-container .form-group {
   flex: 1; /* Asegura que todos los elementos ocupen el mismo espacio */
 }
 
+/* Estilos para el texto del grupo de entrada, centrado vertical y horizontalmente */
 .input-group-prepend .input-group-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; /* Utiliza flexbox para alinear */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
 }
 
-
+/* Contenedor para la hora del evento */
 .hora-evento-container {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* Utiliza flexbox para alinear elementos */
+  justify-content: space-between; /* Espacio entre los dos elementos */
   gap: 20px; /* Espacio entre los dos elementos */
 }
 
+/* Grupo de formulario dentro del contenedor de hora del evento */
 .hora-evento-container .form-group {
   flex: 1; /* Asegura que ambos elementos ocupen el mismo espacio */
 }
 
+/* Estilos para el texto del grupo de entrada, centrado vertical y horizontalmente */
 .input-group-prepend .input-group-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; /* Utiliza flexbox para alinear */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
 }
 
+/* Grupo de entrada para elementos de formulario */
 .input-group {
-  display: flex;
-  align-items: center;
+  display: flex; /* Utiliza flexbox para alinear elementos */
+  align-items: center; /* Centra verticalmente los elementos dentro del grupo */
 }
 
 
