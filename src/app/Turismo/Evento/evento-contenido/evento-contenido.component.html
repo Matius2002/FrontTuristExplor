@@ -1,100 +1,123 @@
+<!-- Separador superior -->
 <div class="mi-separador-div"></div>
 
+<!-- Encabezado principal -->
 <header class="matias">
   <div class="matias-content">
-    <h1 class="title">¡Bienvenidos!</h1>
-    <p class="subtitle">Descubre todos los eventos de Girardot</p>
+    <h1 class="title">¡Bienvenidos!</h1> <!-- Título principal -->
+    <p class="subtitle">Descubre todos los eventos de Girardot</p> <!-- Subtítulo -->
   </div>
-  <img src="assets/images/ExpoCundi.png" alt="Background Image" class="matias-background">
+  <img src="assets/images/ExpoCundi.png" alt="Background Image" class="matias-background"> <!-- Imagen de fondo -->
 </header>
 
+<!-- Separador inferior -->
 <div class="mi-separador-div"></div>
 
+<!-- Sección de clasificación de eventos -->
 <section class="event-categories">
-  <h2>Clasificación de Eventos</h2>
+  <h2>Clasificación de Eventos</h2> <!-- Título de la sección -->
   <div class="categories-grid">
+    <!-- Tarjeta para eventos culturales -->
     <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Cultural')">
-      <i class="fas fa-theater-masks"></i>
-      <h3>Eventos culturales</h3>
-      <p>Explora la riqueza cultural de nuestra ciudad con eventos únicos.</p>
+      <i class="fas fa-theater-masks"></i> <!-- Ícono de eventos culturales -->
+      <h3>Eventos culturales</h3> <!-- Título de la categoría -->
+      <p>Explora la riqueza cultural de nuestra ciudad con eventos únicos.</p> <!-- Descripción -->
     </div>
+
+    <!-- Tarjeta para eventos de aventura -->
     <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo de Aventura')">
-      <i class="fas fa-futbol"></i>
-      <h3>Eventos de Aventura</h3>
-      <p>Participa o asiste a los eventos de Aventura más emocionantes.</p>
+      <i class="fas fa-futbol"></i> <!-- Ícono de eventos de aventura -->
+      <h3>Eventos de Aventura</h3> <!-- Título de la categoría -->
+      <p>Participa o asiste a los eventos de Aventura más emocionantes.</p> <!-- Descripción -->
     </div>
+
+    <!-- Tarjeta para festivales -->
     <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Nocturno')">
-      <i class="fas fa-music"></i>
-      <h3>Festivales</h3>
-      <p>Disfruta de los festivales locales con música, comida y más.</p>
+      <i class="fas fa-music"></i> <!-- Ícono de festivales -->
+      <h3>Festivales</h3> <!-- Título de la categoría -->
+      <p>Disfruta de los festivales locales con música, comida y más.</p> <!-- Descripción -->
     </div>
+
+    <!-- Tarjeta para ferias y eventos comerciales -->
     <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo de Compras')">
-      <i class="fas fa-store"></i>
-      <h3>Ferias y eventos comerciales</h3>
-      <p>Descubre las mejores ferias y eventos comerciales en Girardot.</p>
+      <i class="fas fa-store"></i> <!-- Ícono de ferias y eventos comerciales -->
+      <h3>Ferias y eventos comerciales</h3> <!-- Título de la categoría -->
+      <p>Descubre las mejores ferias y eventos comerciales en Girardot.</p> <!-- Descripción -->
     </div>
+
+    <!-- Tarjeta para eventos religiosos -->
     <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Religioso')">
-      <i class="fas fa-church"></i>
-      <h3>Eventos religiosos</h3>
-      <p>Únete a las celebraciones religiosas y eventos espirituales.</p>
+      <i class="fas fa-church"></i> <!-- Ícono de eventos religiosos -->
+      <h3>Eventos religiosos</h3> <!-- Título de la categoría -->
+      <p>Únete a las celebraciones religiosas y eventos espirituales.</p> <!-- Descripción -->
     </div>
+
+    <!-- Tarjeta para eventos ecológicos -->
     <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Sostenible')">
-      <i class="fas fa-calendar-alt"></i>
-      <h3>Eventos de Ecologicos</h3>
-      <p>No te pierdas los eventos Ecologicos de cada temporada.</p>
+      <i class="fas fa-calendar-alt"></i> <!-- Ícono de eventos ecológicos -->
+      <h3>Eventos de Ecológicos</h3> <!-- Título de la categoría -->
+      <p>No te pierdas los eventos Ecológicos de cada temporada.</p> <!-- Descripción -->
     </div>
+
+    <!-- Tarjeta para eventos de comida -->
     <div class="category-card" (click)="filtrarPorTipoTurismo('Turismo Gastronómico')">
-      <i class="fas fa-utensils"></i>
-      <h3>Eventos de comida</h3>
-      <p>Disfruta de eventos culinarios con la mejor gastronomía local.</p>
+      <i class="fas fa-utensils"></i> <!-- Ícono de eventos de comida -->
+      <h3>Eventos de comida</h3> <!-- Título de la categoría -->
+      <p>Disfruta de eventos culinarios con la mejor gastronomía local.</p> <!-- Descripción -->
     </div>
   </div>
+
   <br>
+  <!-- Botón para ver todos los eventos -->
   <button class="ver-todos-button" (click)="verTodosLosEventos()">Ver Todos los Eventos</button>
 </section>
 
+<!-- Separador inferior -->
 <div class="mi-separador-div"></div>
 
+<!-- Título de la lista de eventos -->
 <h1 class="titulo-event">Lista de Eventos</h1>
+
 <!-- Estructura básica del buscador -->
 <div class="search-container">
-  <input type="text" [(ngModel)]="searchText" (ngModelChange)="aplicarFiltros()" placeholder="Buscar eventos..." class="search-box" />
+  <input type="text" [(ngModel)]="searchText" (ngModelChange)="aplicarFiltros()" placeholder="Buscar eventos..." class="search-box" /> <!-- Campo de búsqueda -->
   <button class="search-button">
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search"></i> <!-- Ícono de búsqueda -->
   </button>
 </div>
 
 <!-- Lista de eventos -->
 <div id="eventos-lista">
-  <!-- Lista de eventos -->
+  <!-- Mensaje si no hay eventos disponibles -->
   <div *ngIf="eventosFiltrados.length === 0" class="no-eventos">No hay eventos disponibles</div>
 
+  <!-- Contenedor de tarjetas de eventos -->
   <div class="card-container" *ngIf="eventosFiltrados.length > 0">
     <div *ngFor="let evento of eventosFiltrados" class="card">
       <!-- Contenido de cada tarjeta de evento -->
       <div class="card-header">
-        <h2 class="card-title">{{ evento.nombre }}</h2>
+        <h2 class="card-title">{{ evento.nombre }}</h2> <!-- Título del evento -->
       </div>
       <div class="card-body">
         <div class="card-content">
-          <p><i class="fas fa-info-circle"></i> <strong>Descripción:</strong> {{ evento.descripcion }}</p>
-          <p><i class="fas fa-calendar-alt"></i> <strong>Fecha:</strong> {{ evento.fechaInicio | date }} - {{ evento.fechaFin | date }}</p>
-          <p><i class="fas fa-map-marker-alt"></i> <strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
-          <p><i class="fas fa-money-bill-wave"></i> <strong>Costo de Entrada:</strong> {{ evento.costoEntrada | currency }}</p>
+          <p><i class="fas fa-info-circle"></i> <strong>Descripción:</strong> {{ evento.descripcion }}</p> <!-- Descripción del evento -->
+          <p><i class="fas fa-calendar-alt"></i> <strong>Fecha:</strong> {{ evento.fechaInicio | date }} - {{ evento.fechaFin | date }}</p> <!-- Fechas del evento -->
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Ubicación:</strong> {{ evento.ubicacion }}</p> <!-- Ubicación del evento -->
+          <p><i class="fas fa-money-bill-wave"></i> <strong>Costo de Entrada:</strong> {{ evento.costoEntrada | currency }}</p> <!-- Costo de entrada -->
           <p><i class="fas fa-globe"></i> <strong>Destinos:</strong>
-            <span *ngFor="let destino of evento.destinos">{{ destino.destinoName }}</span>
+            <span *ngFor="let destino of evento.destinos">{{ destino.destinoName }}</span> <!-- Destinos asociados al evento -->
           </p>
-          <p><i class="fas fa-flag"></i> <strong>Tipo de Turismo:</strong> {{ evento.tipoTurismo.nombre }}</p>
+          <p><i class="fas fa-flag"></i> <strong>Tipo de Turismo:</strong> {{ evento.tipoTurismo.nombre }}</p> <!-- Tipo de turismo del evento -->
         </div>
       </div>
       <div class="card-footer">
         <div class="card-thumbnails">
           <img *ngFor="let imagen of evento.images"
                [src]="getImageUrl(imagen.ruta)"
-               [alt]="imagen.nombre"
-               class="thumbnail"
-               (click)="openModal(imagen)"
-               (error)="onImageError($event, imagen.ruta)" />
+          [alt]="imagen.nombre"
+          class="thumbnail"
+          (click)="openModal(imagen)"
+          (error)="onImageError($event, imagen.ruta)" /> <!-- Manejo de errores al cargar la imagen -->
         </div>
       </div>
     </div>
@@ -103,9 +126,10 @@
 
 <!-- Modal para mostrar imagen ampliada -->
 <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
-  <span class="close" (click)="closeModal()">&times;</span>
-  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()">
-  <div class="caption">{{ selectedImage?.nombre }}</div>
+  <span class="close" (click)="closeModal()">&times;</span> <!-- Botón para cerrar el modal -->
+  <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()"> <!-- Imagen ampliada -->
+  <div class="caption">{{ selectedImage?.nombre }}</div> <!-- Descripción de la imagen ampliada -->
 </div>
 
+<!-- Separador inferior -->
 <div class="mi-separador-div"></div>
