@@ -1,15 +1,17 @@
 <!-- Topbar Principal -->
-<div class="container-fluid topbar">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 text-lg-left mb-lg-0 mb-2 text-center">
-        <div class="d-inline-flex align-items-center">
-          <!-- Eliminado el texto de los párrafos -->
+<div class="container-fluid topbar"> <!-- Contenedor principal de la barra superior, ocupa todo el ancho -->
+  <div class="container"> <!-- Contenedor que centra el contenido y limita el ancho -->
+    <div class="row align-items-center"> <!-- Fila que alinea los elementos verticalmente en el centro -->
+      <div class="col-lg-6 text-lg-left mb-lg-0 mb-2 text-center"> <!-- Columna para el contenido a la izquierda -->
+        <div class="d-inline-flex align-items-center"> <!-- Contenedor flexible en línea para alinear elementos -->
+          <!-- Eliminado el texto de los párrafos --> <!-- Comentario para indicar que se ha removido contenido textual -->
         </div>
       </div>
-      <div class="col-lg-6 text-lg-right text-center">
-        <div class="d-inline-flex align-items-center">
+      <div class="col-lg-6 text-lg-right text-center"> <!-- Columna para los botones a la derecha -->
+        <div class="d-inline-flex align-items-center"> <!-- Contenedor flexible en línea para los botones -->
+          <!-- Botón para iniciar sesión -->
           <a class="btn btn-outline-info mr-2 px-2" (click)="navigateTo('login')">Iniciar Sesión</a>
+          <!-- Botón para registrarse -->
           <a class="btn btn-outline-primary px-2" (click)="navigateTo('nuevo-usuario')">Registrarse</a>
           <!-- Botón de cerrar sesión -->
           <a class="btn btn-outline-danger px-2 ml-2" (click)="logout()">Cerrar Sesión</a>
@@ -18,6 +20,7 @@
     </div>
   </div>
 </div>
+
 <!-- Topbar Principal -->
 
 <!-- <ng-container *ngIf="isLoggedIn">
