@@ -1,25 +1,42 @@
+<!-- Header de la tarjeta con título y opciones de búsqueda -->
 <div class="card-header">
   <br>
-  <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Alojamientos</h3>
+  <!-- Título de la tarjeta con estilos para resaltar en el centro -->
+  <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">
+    Gestión de Alojamientos
+  </h3>
+
+  <!-- Barra de búsqueda con un input para filtrar -->
   <div class="buscador">
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
     <i class="fas fa-search"></i>
   </div>
   <br>
+
+  <!-- Botones de herramientas, con funcionalidades como regresar, recargar, añadir, exportar e imprimir -->
   <div class="card-tools d-flex justify-content-center">
     <div class="btn-group" role="group">
+      <!-- Botón para regresar a la página de sistemas -->
       <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
         <i class="fas fa-home"></i><span>Regresar</span>
       </button>
+
+      <!-- Botón para recargar la tabla -->
       <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
         <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
       </button>
+
+      <!-- Botón para añadir un nuevo alojamiento -->
       <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoTipo()">
-        <i class="fas fa-plus"></i><span> Nuevo Alojamientos</span>
+        <i class="fas fa-plus"></i><span> Nuevo Alojamiento</span>
       </button>
+
+      <!-- Botón para exportar los datos a Excel -->
       <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
         <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
       </button>
+
+      <!-- Botón para imprimir la tabla -->
       <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
         <i class="fas fa-print"></i><span> Imprimir</span>
       </button>
@@ -27,103 +44,126 @@
   </div>
 </div>
 
-<!-- Inicio tabla -->
+<!-- Inicio de la tabla para mostrar los datos de los alojamientos -->
 <div class="card-body table-responsive">
   <table id="printable-table" class="table table-bordered table-striped">
     <thead>
     <tr class="text-center">
+      <!-- Encabezados de columna con funcionalidad de ordenamiento por ID -->
       <th (click)="sortColumn('id')">
         ID
         <span *ngIf="currentColumn === 'id'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por nombre -->
       <th (click)="sortColumn('nombre')">
         Nombre
         <span *ngIf="currentColumn === 'nombre'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por descripción -->
       <th (click)="sortColumn('descripcion')">
-        Descripcion
+        Descripción
         <span *ngIf="currentColumn === 'descripcion'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por tipo de alojamiento -->
       <th (click)="sortColumn('tipoAlojamiento')">
         Tipo Alojamiento
         <span *ngIf="currentColumn === 'tipoAlojamiento'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por dirección -->
       <th (click)="sortColumn('direccion')">
-        Direccion
+        Dirección
         <span *ngIf="currentColumn === 'direccion'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por celular -->
       <th (click)="sortColumn('celular')">
         Celular
         <span *ngIf="currentColumn === 'celular'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por email -->
       <th (click)="sortColumn('email')">
         Email
         <span *ngIf="currentColumn === 'email'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por webUrl -->
       <th (click)="sortColumn('webUrl')">
-        webUrl
+        Web URL
         <span *ngIf="currentColumn === 'webUrl'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por precio general -->
       <th (click)="sortColumn('precioGeneral')">
-        precioGeneral
+        Precio General
         <span *ngIf="currentColumn === 'precioGeneral'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
+
+      <!-- Encabezado para ordenar por fecha de creación -->
       <th (click)="sortColumn('fechaCreacion')">
-        fechaCreacion
+        Fecha de Creación
         <span *ngIf="currentColumn === 'fechaCreacion'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
-      <!--
-      <th (click)="sortColumn('destinos')">
-        Destinos
-        <span *ngIf="currentColumn === 'destinos'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
-      </th>
-      -->
 
+      <!-- Columna para las acciones (editar y eliminar) -->
       <th>Acciones</th>
     </tr>
     </thead>
+
+    <!-- Cuerpo de la tabla con datos de los alojamientos, filtrados y paginados -->
     <tbody>
     <tr *ngFor="let alojamiento of alojamientos | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
       <td class="text-center">{{ alojamiento.id }}</td>
-      <td [innerHTML]="highlightMatches(alojamiento.nombre, searchText)"></td>
-      <td>{{ alojamiento.direccion}}</td>
-      <!--
-      <td>{{ alojamiento.destinos?.nombre }}</td>
-      -->
-      <td>{{ alojamiento.tipoAlojamiento?.nombre }}</td>
-      <td>{{ alojamiento.direccion}}</td>
-      <td>{{ alojamiento.celular}}</td>
-      <td>{{ alojamiento.email}}</td>
-      <td>{{ alojamiento.webUrl}}</td>
-      <td>{{ alojamiento.precioGeneral}}</td>
-      <td>{{ alojamiento.fechaCreacion}}</td>
 
+      <!-- Nombre con resalte de coincidencias de búsqueda -->
+      <td [innerHTML]="highlightMatches(alojamiento.nombre, searchText)"></td>
+      <td>{{ alojamiento.direccion }}</td>
+
+      <!-- Tipo de alojamiento -->
+      <td>{{ alojamiento.tipoAlojamiento?.nombre }}</td>
+      <td>{{ alojamiento.direccion }}</td>
+
+      <!-- Celular, email y web URL -->
+      <td>{{ alojamiento.celular }}</td>
+      <td>{{ alojamiento.email }}</td>
+      <td>{{ alojamiento.webUrl }}</td>
+
+      <!-- Precio y fecha de creación -->
+      <td>{{ alojamiento.precioGeneral }}</td>
+      <td>{{ alojamiento.fechaCreacion }}</td>
+
+      <!-- Botones de acción: editar y eliminar -->
       <td class="d-flex justify-content-center align-items-center">
+        <!-- Botón para abrir el modal de actualización -->
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(alojamiento)">
           <i class="fas fa-edit"></i>
         </button>
+
+        <!-- Botón para eliminar el alojamiento -->
         <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarAlojamiento(alojamiento)">
           <i class="fas fa-trash"></i>
         </button>
@@ -131,6 +171,8 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- Controles de paginación -->
   <pagination-controls
     (pageChange)="page = $event"
     previousLabel="Anterior"
@@ -142,8 +184,11 @@
     size="sm">
   </pagination-controls>
 
+  <!-- Botones para ir a la primera o última página -->
   <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
   <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+
+  <!-- Información de la paginación -->
   <div class="pagination-info">
     <p>Total de elementos: {{ (alojamientos | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
     <p>Total de páginas: {{ Math.ceil(alojamientos.length / 5) }}</p>
