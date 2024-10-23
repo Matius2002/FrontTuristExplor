@@ -1,20 +1,24 @@
-<div class="mi-separador-div"></div>
+<div class="mi-separador-div"></div> <!-- Este div es un separador visual -->
 <div class="contenedor-principal">
   <div class="header">
+    <!-- Botón para regresar al inicio -->
     <button class="boton-dashboard" (click)="navigateTo('tu-inicio')">
       <i class="fas fa-home"></i> <span>Regresar</span>
     </button>
+    <!-- Botón para abrir la ventana de ayuda -->
     <button class="boton-ayuda" (click)="toggleHelpModal()">
       <i class="fas fa-question-circle"></i> <span>Ayuda</span>
     </button>
   </div>
 
-  <!-- Ventana emergente de ayuda -->
-
+  <!-- Modal o ventana emergente de ayuda. Se muestra o se oculta según el valor de 'isHelpModalVisible' -->
   <div class="modal-ayuda-unico" [class.show]="isHelpModalVisible">
     <div class="modal-content-ayuda-unico">
+      <!-- Botón para cerrar el modal de ayuda -->
       <span class="close-ayuda-unico" (click)="toggleHelpModal()">&times;</span>
+      <!-- Título del modal de ayuda -->
       <h3 class="text-danger text-center" style="font-size: 2rem;">Ayuda del Panel Administrativo</h3>
+      <!-- Lista de secciones que explican las funcionalidades del panel administrativo -->
       <ul>
         <li>
           <strong>Destinos Turísticos:</strong> Permite gestionar la información sobre los destinos turísticos disponibles, incluyendo descripciones, ubicaciones, y características únicas.
@@ -62,13 +66,15 @@
     </div>
   </div>
 
-
   <div class="contenedor-secundario">
+    <!-- Título del panel administrativo -->
     <h3 class="text-center">Panel Administrativo de TuristExplor</h3>
+    <!-- Descripción general del panel administrativo -->
     <p>El Panel Administrativo de TuristExplor te permite gestionar todos los aspectos relacionados con destinos turísticos, tipos de turismo, atracciones, eventos, épocas para visitar, noticias, imágenes, experiencias, alojamiento, usuarios, roles y permisos.</p>
   </div>
 
   <div class="contenedor-botones">
+    <!-- Botones que redirigen a las distintas secciones del panel administrativo -->
     <button class="boton" data-name="Destinos Turísticos" (click)="navigateTo('destinos')">
       <span>Destinos Turísticos</span><i class="fas fa-globe"></i>
     </button>
@@ -104,6 +110,7 @@
     <button class="boton" data-name="Roles" (click)="navigateTo('roles')">
       <span>Roles</span><i class="fas fa-user-tag"></i>
     </button>
+    <!-- Botón comentado de Permisos, si se quiere habilitar más adelante -->
     <!--
     <button class="boton" data-name="Permisos" (click)="navigateTo('permisos')">
       <span>Permisos</span><i class="fas fa-lock"></i>
@@ -117,6 +124,5 @@
     </button>
   </div>
 </div>
-
-<div class="mi-separador-div"></div>
+<div class="mi-separador-div"></div> <!-- Otro separador visual -->
 
