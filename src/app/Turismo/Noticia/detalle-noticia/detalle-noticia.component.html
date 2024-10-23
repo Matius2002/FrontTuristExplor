@@ -1,65 +1,90 @@
-<div class="mi-separador-div"></div>
-<div class="container">
-  <h1 class="title">Bienvenidos al Blog de Noticias Turísticas</h1>
-  <p class="description">¡Bienvenidos a nuestro blog de noticias turísticas! Aquí encontrarás las últimas novedades, consejos de viaje, destinos destacados y todo lo relacionado con el emocionante mundo del turismo. Ya sea que estés planeando tu próximo viaje o simplemente disfrutando de leer sobre lugares fascinantes, ¡estás en el lugar correcto!</p>
-</div>
+<!-- Separador superior -->
 <div class="mi-separador-div"></div>
 
+<!-- Contenedor principal de la sección de bienvenida -->
+<div class="container">
+  <!-- Título principal del blog -->
+  <h1 class="title">Bienvenidos al Blog de Noticias Turísticas</h1>
+
+  <!-- Descripción del blog -->
+  <p class="description">
+    ¡Bienvenidos a nuestro blog de noticias turísticas! Aquí encontrarás las últimas novedades, consejos de viaje, destinos destacados y todo lo relacionado con el emocionante mundo del turismo.
+    Ya sea que estés planeando tu próximo viaje o simplemente disfrutando de leer sobre lugares fascinantes, ¡estás en el lugar correcto!
+  </p>
+</div>
+
+<!-- Separador inferior -->
+<div class="mi-separador-div"></div>
+
+<!-- Título de noticias destacadas -->
 <h1 class="titulo-event">Noticias destacadas</h1>
 
-
-<!-- Tabla de noticias -->
+<!-- Tabla de noticias; solo se muestra si no hay una noticia seleccionada -->
 <div class="blog-container" *ngIf="!selectedNoticia">
+  <!-- Itera sobre las noticias filtradas y muestra cada una -->
   <div *ngFor="let noticia of getFilteredNoticias(); let i = index"
        [ngClass]="{'blog-post-style-1': (i % 6) < 3, 'blog-post-style-2': (i % 6) >= 3}">
+
+    <!-- Encabezado de la publicación -->
     <div class="post-header">
+      <!-- Título de la noticia -->
       <h2 class="post-title">{{ noticia.titulo }}</h2>
       <p class="post-meta">
+        <!-- Fecha de publicación y fuente de la noticia -->
         <span class="post-date">{{ noticia.fechaPublicacion | date:'dd/MM/yyyy' }}</span> |
         <span class="post-source">{{ noticia.fuente }}</span>
       </p>
     </div>
+
+    <!-- Contenido de la noticia -->
     <div class="post-content">
       <p>{{ noticia.contenido }}</p>
-      <p>{{ noticia.tipoTurismo.nombre }}</p>
+      <p>{{ noticia.tipoTurismo.nombre }}</p> <!-- Nombre del tipo de turismo relacionado -->
     </div>
+
+    <!-- Sección de imágenes de la noticia -->
     <div class="post-images">
+      <!-- Muestra cada imagen asociada a la noticia -->
       <img *ngFor="let imagen of noticia.images"
            [src]="getImageUrl(imagen.ruta)"
            [alt]="imagen.nombre"
            class="post-image"
            (click)="openModal(imagen)"
-           (error)="onImageError($event, imagen.ruta)"
-           title="Haz clic para ampliar" />
+      (error)="onImageError($event, imagen.ruta)"
+      title="Haz clic para ampliar" />
     </div>
   </div>
 </div>
 
-
-
-<!-- Sección de detalles de noticia -->
+<!-- Sección de detalles de la noticia seleccionada -->
 <div *ngIf="selectedNoticia" class="detalle-noticia">
   <div class="detalle-header">
+    <!-- Título de la noticia seleccionada -->
     <h2>{{ selectedNoticia.titulo }}</h2>
+    <!-- Botón para ver todas las noticias -->
     <button class="btn-primary" (click)="verTodasLasNoticias()">Ver todas las noticias</button>
   </div>
+
   <div class="detalle-content">
+    <!-- Contenido de la noticia seleccionada -->
     <p>{{ selectedNoticia.contenido }}</p>
-    <p>{{ selectedNoticia.tipoTurismo.nombre }}</p>
+    <p>{{ selectedNoticia.tipoTurismo.nombre }}</p> <!-- Nombre del tipo de turismo relacionado -->
     <div class="detalle-images">
+      <!-- Muestra cada imagen asociada a la noticia seleccionada -->
       <img *ngFor="let imagen of selectedNoticia.images"
            [src]="getImageUrl(imagen.ruta)"
            [alt]="imagen.nombre"
            (click)="openModal(imagen)"
-           (error)="onImageError($event, imagen.ruta)"
-           title="Haz clic para ampliar" />
+      (error)="onImageError($event, imagen.ruta)"
+      title="Haz clic para ampliar" />
     </div>
   </div>
 </div>
 
 <!-- Modal para mostrar imagen ampliada -->
 <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
-  <span class="close" (click)="closeModal()">&times;</span>
+  <span class="close" (click)="closeModal()">&times;</span> <!-- Botón para cerrar el modal -->
+  <!-- Imagen ampliada -->
   <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" [alt]="selectedImage?.nombre" />
-  <div class="caption">{{ selectedImage?.nombre }}</div>
+  <div class="caption">{{ selectedImage?.nombre }}</div> <!-- Título de la imagen ampliada -->
 </div>
