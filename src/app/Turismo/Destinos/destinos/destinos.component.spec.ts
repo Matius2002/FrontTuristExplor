@@ -3,21 +3,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DestinosComponent } from './destinos.component';
 
 describe('DestinosComponent', () => {
-  let component: DestinosComponent;
-  let fixture: ComponentFixture<DestinosComponent>;
+  let component: DestinosComponent; // Declaración de la variable para el componente Destinos
+  let fixture: ComponentFixture<DestinosComponent>; // Declaración de la variable para el fixture del componente
 
+  // Configuración del entorno de pruebas
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DestinosComponent]
+      imports: [DestinosComponent] // Importa el componente Destinos para las pruebas
     })
-    .compileComponents();
-    
+      .compileComponents(); // Compila los componentes para pruebas
+
+    // Crea una instancia del componente y del fixture
     fixture = TestBed.createComponent(DestinosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = fixture.componentInstance; // Asigna la instancia del componente a la variable
+    fixture.detectChanges(); // Detecta cambios en el fixture
   });
 
+  // Test para verificar que el componente se crea correctamente
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeTruthy(); // Verifica que la instancia del componente sea verdadera (exista)
   });
 });
