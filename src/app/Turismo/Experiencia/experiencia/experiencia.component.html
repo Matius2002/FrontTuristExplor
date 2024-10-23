@@ -1,26 +1,41 @@
 <div class="card-header">
+  <!-- Espacio en blanco antes del título -->
   <br>
+  <!-- Título de la tarjeta -->
   <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Experiencias de Usuarios</h3>
+
+  <!-- Input de búsqueda -->
   <div class="buscador">
+    <!-- Input con enlace a la propiedad searchText y evento (input) para realizar búsqueda -->
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search"></i> <!-- Icono de búsqueda -->
   </div>
   <br>
+
+  <!-- Contenedor de botones con centrado -->
   <div class="card-tools d-flex justify-content-center">
     <div class="btn-group" role="group">
+      <!-- Botón para regresar al sistema principal -->
       <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
         <i class="fas fa-home"></i><span>Regresar</span>
       </button>
 
+      <!-- Botón para recargar la tabla -->
       <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
         <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
       </button>
+
+      <!-- Botón para crear una nueva experiencia -->
       <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoExperiencia()">
         <i class="fas fa-plus"></i><span> Nueva Experiencia</span>
       </button>
+
+      <!-- Botón para exportar a Excel -->
       <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
         <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
       </button>
+
+      <!-- Botón para imprimir la tabla -->
       <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
         <i class="fas fa-print"></i><span> Imprimir</span>
       </button>
@@ -28,19 +43,21 @@
   </div>
 </div>
 
-<!-- Inicio tabla -->
+<!-- Inicio de la tabla de experiencias -->
 <div class="card-body table-responsive">
   <table id="printable-table" class="table table-bordered table-striped">
     <thead>
     <tr class="text-center">
+      <!-- Columnas de la tabla con funcionalidad de ordenamiento -->
       <th (click)="sortColumn('id')">
         ID
+        <!-- Icono de ordenación para la columna ID -->
         <span *ngIf="currentColumn === 'id'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
       </th>
       <th (click)="sortColumn('calificacion')">
-        Calificacion
+        Calificación
         <span *ngIf="currentColumn === 'calificacion'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
@@ -64,7 +81,7 @@
         </span>
       </th>
       <th (click)="sortColumn('destinos')">
-        destinos
+        Destinos
         <span *ngIf="currentColumn === 'destinos'" class="sorting-icon">
           <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
         </span>
@@ -72,20 +89,21 @@
       <th>Acciones</th>
     </tr>
     </thead>
+
+    <!-- Cuerpo de la tabla que itera sobre la lista de experiencias -->
     <tbody>
     <tr *ngFor="let experiencia of experiencias | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
+      <!-- Muestra los datos de cada experiencia -->
       <td class="text-center">{{ experiencia.id }}</td>
       <td [innerHTML]="highlightMatches(experiencia.calificacion, searchText)"></td>
       <td>{{ experiencia.comentario }}</td>
       <td>{{ experiencia.fecha }}</td>
       <td>{{ experiencia.usuario?.nombreUsuario }}</td>
       <td>{{ experiencia.destinos?.destinoName }}</td>
+
+      <!-- Columna de acciones (actualizar y eliminar) -->
       <td class="d-flex justify-content-center align-items-center">
-        <!--
-        <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(experiencia)">
-          <i class="fas fa-edit"></i>
-        </button>
-        -->
+        <!-- Botón para eliminar experiencia -->
         <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarExperiencia(experiencia)">
           <i class="fas fa-trash"></i>
         </button>
@@ -93,6 +111,8 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- Paginación de la tabla -->
   <pagination-controls
     (pageChange)="page = $event"
     previousLabel="Anterior"
@@ -104,8 +124,11 @@
     size="sm">
   </pagination-controls>
 
+  <!-- Botones para navegar a la primera y última página -->
   <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
   <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+
+  <!-- Información de la paginación -->
   <div class="pagination-info">
     <p>Total de elementos: {{ (experiencias | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
     <p>Total de páginas: {{ Math.ceil(experiencias.length / 5) }}</p>
