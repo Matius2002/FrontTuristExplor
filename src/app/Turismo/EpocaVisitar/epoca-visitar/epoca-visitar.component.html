@@ -1,25 +1,40 @@
 <div class="card-header">
   <br>
+  <!-- Título de la sección de gestión de épocas -->
   <h3 class="card-title text-center card-title m-2 text-primary font-weight-bold">Gestión de Epocas</h3>
+
+  <!-- Contenedor del buscador -->
   <div class="buscador">
+    <!-- Campo de entrada para buscar -->
     <input type="text" [(ngModel)]="searchText" (input)="performSearch()" placeholder="Buscar...">
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search"></i> <!-- Ícono de búsqueda -->
   </div>
   <br>
+
+  <!-- Herramientas de la tarjeta -->
   <div class="card-tools d-flex justify-content-center">
     <div class="btn-group" role="group">
+      <!-- Botón para regresar a la página anterior -->
       <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="navigateTo('sistemas')">
         <i class="fas fa-home"></i><span>Regresar</span>
       </button>
+
+      <!-- Botón para recargar la tabla -->
       <button type="button" class="btn btn-outline-warning btn-sm mx-2" onclick="window.location.reload()">
         <i class="fas fa-sync-alt"></i><span> Recargar Tabla</span>
       </button>
+
+      <!-- Botón para agregar una nueva época -->
       <button type="button" class="btn btn-outline-primary btn-sm mx-2" (click)="onNuevoEpoca()">
         <i class="fas fa-plus"></i><span> Nuevo Epoca</span>
       </button>
+
+      <!-- Botón para exportar a Excel -->
       <button type="button" class="btn btn-outline-success btn-sm mx-2" (click)="exportToExcel()">
         <i class="far fa-file-excel"></i><span> Exportar a Excel</span>
       </button>
+
+      <!-- Botón para imprimir la tabla -->
       <button type="button" class="btn btn-outline-info btn-sm mx-2" (click)="printTable()">
         <i class="fas fa-print"></i><span> Imprimir</span>
       </button>
@@ -32,43 +47,57 @@
   <table id="printable-table" class="table table-bordered table-striped">
     <thead>
     <tr class="text-center">
+      <!-- Encabezado de ID con opción de ordenamiento -->
       <th (click)="sortColumn('id')">
         ID
         <span *ngIf="currentColumn === 'id'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
+
+      <!-- Encabezado de Nombre con opción de ordenamiento -->
       <th (click)="sortColumn('nombre')">
         Nombre
         <span *ngIf="currentColumn === 'nombre'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
+
+      <!-- Encabezado de Descripción con opción de ordenamiento -->
       <th (click)="sortColumn('descripcion')">
         Descripción
         <span *ngIf="currentColumn === 'descripcion'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
+
+      <!-- Encabezado de Clima con opción de ordenamiento -->
       <th (click)="sortColumn('clima')">
         Clima
         <span *ngIf="currentColumn === 'clima'" class="sorting-icon">
-          <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
-        </span>
+            <i class="fas fa-caret-{{ sortOrder === 'asc' ? 'up' : 'down' }}"></i>
+          </span>
       </th>
-      <th>Acciones</th>
+
+      <th>Acciones</th> <!-- Columna para las acciones -->
     </tr>
     </thead>
     <tbody>
+    <!-- Filas de la tabla generadas dinámicamente -->
     <tr *ngFor="let epoca of epocaVisitars | filterBy: searchText | paginate: { itemsPerPage: 5, currentPage: page }">
       <td class="text-center">{{ epoca.id }}</td>
       <td [innerHTML]="highlightMatches(epoca.nombre, searchText)"></td>
       <td>{{ epoca.descripcion }}</td>
       <td>{{ epoca.clima }}</td>
+
+      <!-- Columna de botones de acción para cada época -->
       <td class="d-flex justify-content-center align-items-center">
+        <!-- Botón para abrir el modal de actualización -->
         <button type="button" class="btn btn-outline-info btn-sm mr-1" appTooltip="Actualizar" (click)="openUpdateModal(epoca)">
           <i class="fas fa-edit"></i>
         </button>
+
+        <!-- Botón para eliminar la época -->
         <button type="button" class="btn btn-outline-danger btn-sm" appTooltip="Eliminar" (click)="onEliminarEpoca(epoca)">
           <i class="fas fa-trash"></i>
         </button>
@@ -76,6 +105,8 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- Controles de paginación -->
   <pagination-controls
     (pageChange)="page = $event"
     previousLabel="Anterior"
@@ -87,8 +118,11 @@
     size="sm">
   </pagination-controls>
 
+  <!-- Botones para ir a la primera y última página -->
   <button class="btn btn-sm pagination-btn pagination-btn-primary" (click)="page = 1" [disabled]="page === 1">Primera</button>
   <button class="btn btn-sm pagination-btn pagination-btn-light" (click)="page = totalPages" [disabled]="page === totalPages">Última</button>
+
+  <!-- Información de paginación -->
   <div class="pagination-info">
     <p>Total de elementos: {{ (epocaVisitars | paginate: { itemsPerPage: 5, currentPage: page }).length }}</p>
     <p>Total de páginas: {{ Math.ceil(epocaVisitars.length / 5) }}</p>
