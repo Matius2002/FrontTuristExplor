@@ -1,69 +1,80 @@
-<!-- editar-imagen.component.html -->
+<!-- Contenido del modal para editar una imagen -->
 <div mat-dialog-content class="modal-content-editar-turismo">
-    <div class="modal-header-editar-turismo">
-      <h5 class="modal-title-editar-turismo">Editar Imagen</h5>
-      <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body-editar-turismo">
-      <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
-        <!-- inicio nombre -->
-        <div class="form-group-editar-turismo">
-          <label for="nombre">Nombre de la Imagen</label>
-          <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre de la Imagen" class="form-control-editar-turismo">
-          <div *ngIf="editarForm.get('nombre')?.invalid && (editarForm.get('nombre')?.dirty || editarForm.get('nombre')?.touched)">
-            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.errors?.['required']">El Nombre es obligatorio.</div>
-            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.errors?.['minlength']">El Nombre debe tener al menos 5 caracteres.</div>
-            <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.errors?.['maxlength']">El Nombre no debe exceder los 50 caracteres.</div>
-          </div>
-        </div>
-        <!-- fin nombre -->
+  <!-- Encabezado del modal -->
+  <div class="modal-header-editar-turismo">
+    <h5 class="modal-title-editar-turismo">Editar Imagen</h5>
+    <!-- Botón para cerrar el modal -->
+    <button type="button" class="close-editar-turismo" aria-label="Close" (click)="onCancelar()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
-        <!-- inicio archivo -->
-        <div class="form-group-editar-turismo">
-          <label for="archivo" class="select-file-label">Seleccionar Archivo</label>
-          <input id="archivo" type="file" (change)="onFileChange($event)" class="form-control-file">
-          <p class="file-info">Tamaño (máximo 500MB cada una) en formato JPG, PNG, GIF o BMP:</p>
-          <div *ngIf="editarForm.get('ruta')?.invalid && editarForm.get('ruta')?.touched" class="error-messages">
-            <span *ngIf="editarForm.get('ruta')?.errors?.['required']" class="error-message">La ruta es requerida.</span>
-            <span *ngIf="selectedFiles.length > 0 && !validarTipoArchivo(selectedFiles[0])" class="error-message">Formato de archivo no válido. Solo se permiten archivos JPG, PNG, GIF o BMP.</span>
-            <span *ngIf="selectedFiles.length > 0 && !validarTamanoArchivo(selectedFiles[0])" class="error-message">El tamaño del archivo excede el límite máximo de 500MB.</span>
-          </div>
-        </div>
-        <!-- fin archivo -->
+  <!-- Cuerpo del modal donde se encuentra el formulario -->
+  <div class="modal-body-editar-turismo">
+    <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
 
-        <!-- inicio acciones de archivo -->
-        <div *ngIf="selectedFiles.length > 0">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{ selectedFiles[0].name }}</h5>
-              <div class="btn-group btn-group-sm" role="group" aria-label="Acciones">
-                <button type="button" class="btn btn-outline-danger" (click)="eliminarFoto()">
-                  <span class="d-md-none"><i class="fas fa-trash"></i></span>
-                  <span class="d-none d-md-inline">Eliminar</span>
-                </button>
-                <button type="button" class="btn btn-outline-primary" (click)="verFotoCompleta()">
-                  <span class="d-md-none"><i class="fas fa-eye"></i></span>
-                  <span class="d-none d-md-inline">Ver</span>
-                </button>
-                <button type="button" class="btn btn-outline-warning" (click)="descargarFoto()">
-                  <span class="d-md-none"><i class="fas fa-download"></i></span>
-                  <span class="d-none d-md-inline">Descargar</span>
-                </button>
-              </div>
+      <!-- Campo de entrada para el nombre de la imagen -->
+      <div class="form-group-editar-turismo">
+        <label for="nombre">Nombre de la Imagen</label>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre de la Imagen" class="form-control-editar-turismo">
+
+        <!-- Validación de errores para el campo 'nombre' -->
+        <div *ngIf="editarForm.get('nombre')?.invalid && (editarForm.get('nombre')?.dirty || editarForm.get('nombre')?.touched)">
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.errors?.['required']">El Nombre es obligatorio.</div>
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.errors?.['minlength']">El Nombre debe tener al menos 5 caracteres.</div>
+          <div class="text-danger-editar-turismo" *ngIf="editarForm.get('nombre')?.errors?.['maxlength']">El Nombre no debe exceder los 50 caracteres.</div>
+        </div>
+      </div>
+
+      <!-- Campo de selección para cargar un archivo de imagen -->
+      <div class="form-group-editar-turismo">
+        <label for="archivo" class="select-file-label">Seleccionar Archivo</label>
+        <input id="archivo" type="file" (change)="onFileChange($event)" class="form-control-file">
+        <p class="file-info">Tamaño (máximo 500MB cada una) en formato JPG, PNG, GIF o BMP:</p>
+
+        <!-- Validaciones relacionadas con el archivo cargado -->
+        <div *ngIf="editarForm.get('ruta')?.invalid && editarForm.get('ruta')?.touched" class="error-messages">
+          <span *ngIf="editarForm.get('ruta')?.errors?.['required']" class="error-message">La ruta es requerida.</span>
+          <span *ngIf="selectedFiles.length > 0 && !validarTipoArchivo(selectedFiles[0])" class="error-message">Formato de archivo no válido. Solo se permiten archivos JPG, PNG, GIF o BMP.</span>
+          <span *ngIf="selectedFiles.length > 0 && !validarTamanoArchivo(selectedFiles[0])" class="error-message">El tamaño del archivo excede el límite máximo de 500MB.</span>
+        </div>
+      </div>
+
+      <!-- Acciones disponibles si ya hay un archivo seleccionado -->
+      <div *ngIf="selectedFiles.length > 0">
+        <div class="card">
+          <div class="card-body">
+            <!-- Mostrar el nombre del archivo seleccionado -->
+            <h5 class="card-title">{{ selectedFiles[0].name }}</h5>
+
+            <!-- Botones de acciones sobre la imagen seleccionada: eliminar, ver, descargar -->
+            <div class="btn-group btn-group-sm" role="group" aria-label="Acciones">
+              <button type="button" class="btn btn-outline-danger" (click)="eliminarFoto()">
+                <span class="d-md-none"><i class="fas fa-trash"></i></span>
+                <span class="d-none d-md-inline">Eliminar</span>
+              </button>
+              <button type="button" class="btn btn-outline-primary" (click)="verFotoCompleta()">
+                <span class="d-md-none"><i class="fas fa-eye"></i></span>
+                <span class="d-none d-md-inline">Ver</span>
+              </button>
+              <button type="button" class="btn btn-outline-warning" (click)="descargarFoto()">
+                <span class="d-md-none"><i class="fas fa-download"></i></span>
+                <span class="d-none d-md-inline">Descargar</span>
+              </button>
             </div>
           </div>
         </div>
-        <!-- fin acciones de archivo -->
+      </div>
 
-        <!-- Botones -->
-        <div class="modal-footer-editar-turismo">
-          <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Actualizar</button>
-          <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
-        </div>
-      </form>
-    </div>
+      <!-- Pie del modal con los botones de acciones principales -->
+      <div class="modal-footer-editar-turismo">
+        <!-- Botón para cancelar y cerrar el modal -->
+        <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+        <!-- Botón para enviar el formulario -->
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <!-- Botón para limpiar el formulario -->
+        <button type="button" class="btn btn-danger" (click)="onClearForm()">Limpiar</button>
+      </div>
+    </form>
   </div>
-
+</div>
