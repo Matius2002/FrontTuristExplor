@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {EditarEpocaVisitarComponent} from "../editar-epoca-visitar/editar-epoca-visitar.component";
 import * as ExcelJS from "exceljs";
+
 interface EpocaVisitar{
   id: number;
   nombre: string;
