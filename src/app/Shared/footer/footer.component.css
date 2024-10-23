@@ -1,51 +1,51 @@
 /* Footer Styles */
 .container-fluid {
-  background-color: #222121;
-  color: #fff;
-  border-top: 1px solid rgba(255, 255, 255, .1);
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem 1rem; /* Ajuste el padding */
+  background-color: #222121; /* Color de fondo oscuro para el footer */
+  color: #fff; /* Color del texto en blanco */
+  border-top: 1px solid rgba(255, 255, 255, .1); /* Borde superior sutil en blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para dar profundidad */
+  padding: 1rem 1rem; /* Ajuste el padding para el contenido del footer */
 }
 
 /* Social Icons */
 .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  display: flex; /* Utiliza flexbox para alinear los íconos socialmente */
+  justify-content: center; /* Centra los íconos horizontalmente */
+  gap: 0.5rem; /* Espacio entre los íconos */
 }
 
 .social-icons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #007bff;
-  border-radius: 50%;
-  color: #007bff;
-  transition: background-color 0.3s, color 0.3s;
+  display: flex; /* Utiliza flexbox para el contenido dentro del enlace */
+  align-items: center; /* Alinea verticalmente los íconos */
+  justify-content: center; /* Alinea horizontalmente los íconos */
+  width: 40px; /* Ancho del ícono */
+  height: 40px; /* Altura del ícono */
+  border: 1px solid #007bff; /* Borde azul alrededor de los íconos */
+  border-radius: 50%; /* Hace que los íconos sean circulares */
+  color: #007bff; /* Color del ícono azul */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave para cambios de color */
 }
 
 .social-icons a:hover {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #007bff; /* Cambia el fondo a azul al pasar el mouse */
+  color: #fff; /* Cambia el color del ícono a blanco al pasar el mouse */
 }
 
 /* Alignment Fix for Footer Text */
 .text-center {
-  text-align: center;
+  text-align: center; /* Alinea el texto al centro */
 }
 
 /* Responsive Styles */
 @media (min-width: 768px) {
   .container-fluid {
-    padding: 1rem 2rem;
+    padding: 1rem 2rem; /* Ajusta el padding para pantallas más grandes */
   }
 }
 
 @media (max-width: 767.98px) {
   .text-center {
-    text-align: center;
+    text-align: center; /* Asegura que el texto esté centrado en pantallas pequeñas */
   }
 }
