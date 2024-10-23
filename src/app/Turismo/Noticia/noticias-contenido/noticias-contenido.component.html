@@ -1,16 +1,26 @@
+<!-- Divisor para separar secciones -->
 <div class="mi-separador-div"></div>
+
 <div class="container">
   <h1 class="title">Bienvenidos al Blog de Noticias Turísticas</h1>
-  <p class="description">¡Bienvenidos a nuestro blog de noticias turísticas! Aquí encontrarás las últimas novedades, consejos de viaje, destinos destacados y todo lo relacionado con el emocionante mundo del turismo. Ya sea que estés planeando tu próximo viaje o simplemente disfrutando de leer sobre lugares fascinantes, ¡estás en el lugar correcto!</p>
+  <p class="description">
+    ¡Bienvenidos a nuestro blog de noticias turísticas! Aquí encontrarás las últimas novedades,
+    consejos de viaje, destinos destacados y todo lo relacionado con el emocionante mundo del turismo.
+    Ya sea que estés planeando tu próximo viaje o simplemente disfrutando de leer sobre lugares fascinantes,
+    ¡estás en el lugar correcto!
+  </p>
 </div>
+
+<!-- Divisor para separar secciones -->
 <div class="mi-separador-div"></div>
 
 <h1 class="titulo-event">Noticias destacadas</h1>
+
 <!-- Estructura básica del buscador -->
 <div class="search-container">
   <input type="text" [(ngModel)]="searchText" placeholder="Buscar ..." class="search-box" />
   <button class="search-button">
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search"></i> <!-- Ícono de búsqueda -->
   </button>
 </div>
 
@@ -41,17 +51,18 @@
            [alt]="imagen.nombre"
            class="post-image"
            (click)="openModal(imagen)"
-           (error)="onImageError($event, imagen.ruta)"
-           title="Haz clic para ampliar" />
+      (error)="onImageError($event, imagen.ruta)"
+      title="Haz clic para ampliar" />
     </div>
   </div>
 </div>
 
-
 <!-- Modal para mostrar imagen ampliada -->
 <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
-  <span class="close" (click)="closeModal()">&times;</span>
+  <span class="close" (click)="closeModal()">&times;</span> <!-- Ícono de cerrar modal -->
   <img class="modal-content" [src]="getImageUrl(selectedImage?.ruta)" (click)="$event.stopPropagation()" alt="img">
   <div class="caption">{{ selectedImage?.nombre }}</div>
 </div>
+
+<!-- Divisor para separar secciones -->
 <div class="mi-separador-div"></div>
