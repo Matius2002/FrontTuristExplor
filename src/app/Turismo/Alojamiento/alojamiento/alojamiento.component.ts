@@ -14,24 +14,32 @@ import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import * as ExcelJS from "exceljs";
 import {EditarAlojamientoComponent} from "../editar-alojamiento/editar-alojamiento.component";
+
+// Interfaz para los destinos
 interface Destinos {
   id: number;
   destinoName: string;
 }
-interface  TipoAlojamiento{
+
+// Interfaz para el tipo de alojamiento
+interface TipoAlojamiento {
   id: number;
   nombre: string;
 }
+
+// Interfaz para las imágenes
 interface Images {
   id: number;
   nombre: string;
   ruta: string;
   activa: boolean;
 }
-interface Alojamiento{
+
+// Interfaz para el alojamiento
+interface Alojamiento {
   id: number;
   descripcion: string;
-  destinos: Destinos [];
+  destinos: Destinos[];
   nombre: string;
   tipoAlojamiento: TipoAlojamiento;
   direccion: string;
@@ -42,12 +50,16 @@ interface Alojamiento{
   fechaCreacion: Date;
   imagenes: Images[];
 }
+
+// Interfaz para los elementos en la búsqueda
 interface Item {
   id: number;
   nombre: string;
 }
+
+// Decorador de componente
 @Component({
-  providers:[HttpClient, AlojamientoService],
+  providers: [HttpClient, AlojamientoService],
   selector: 'app-alojamiento',
   standalone: true,
   imports: [
@@ -67,22 +79,22 @@ interface Item {
   templateUrl: './alojamiento.component.html',
   styleUrl: './alojamiento.component.css'
 })
-export class AlojamientoComponent implements OnInit{
-  isHelpModalVisible: boolean = false;
-  alojamientos: Alojamiento[] = [];
+export class AlojamientoComponent implements OnInit {
+  isHelpModalVisible: boolean = false; // Estado para controlar la visibilidad del modal de ayuda
+  alojamientos: Alojamiento[] = []; // Lista de alojamientos cargados
   page = 1; // Inicializa la página en 1
   itemsPerPage = 5; // Número de elementos por página
   totalPages = 0; // Número total de páginas
   currentColumn: string = 'id'; // Columna inicial para ordenar
-  sortOrder: string = 'asc';
+  sortOrder: string = 'asc'; // Orden ascendente inicialmente
 
-  // tipo Eliminar
+  // Variables para eliminar alojamiento
   showAlert: boolean = false;
   alojamientoToDelete: Alojamiento | null = null;
   alojamientoEliminado: boolean = false;
   errorMessage: string | null = null;
 
-  //búsqueda
+  // Variables para la búsqueda
   searchText: string = '';
   items: Item[] = [];
   filteredItems: Item[] = [];
@@ -93,20 +105,22 @@ export class AlojamientoComponent implements OnInit{
     private alojamientoService: AlojamientoService,
     private dialog: MatDialog,
     private router: Router,
-  ) {
-  }
+  ) {}
+
   ngOnInit(): void {
-    this.cargarAlojamiento();
+    this.cargarAlojamiento(); // Cargar los alojamientos al iniciar
   }
-  //Imprimir
+
+  // Metodo para imprimir la tabla
   printTable() {
     window.print();
   }
-  // Actualizar torre
+
+  // Abrir modal para actualizar alojamiento
   openUpdateModal(alojamientos: Alojamiento): void {
     const dialogRef = this.dialog.open(EditarAlojamientoComponent, {
       width: '400px',
-      data: {alojamientos}
+      data: { alojamientos }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'success') {
@@ -116,9 +130,11 @@ export class AlojamientoComponent implements OnInit{
       }
     });
   }
+
   protected readonly Math = Math;
+
+  // Cargar la lista de alojamientos desde el servicio
   cargarAlojamiento() {
-    // Lógica para cargar los datos de la base de datos.
     this.alojamientoService.recuperarTodosAlojamiento().subscribe(
       data => {
         console.log("Datos recibidos del servidor:", data);
@@ -127,20 +143,19 @@ export class AlojamientoComponent implements OnInit{
           return {
             id: alojamiento.id,
             nombre: alojamiento.nombre,
-            descripcion:alojamiento.descripcion,
+            descripcion: alojamiento.descripcion,
             destinos: alojamiento.destinos,
             tipoAlojamiento: alojamiento.tipoAlojamiento,
             direccion: alojamiento.direccion,
             celular: alojamiento.celular,
             email: alojamiento.email,
             webUrl: alojamiento.webUrl,
-            precioGeneral:alojamiento.precioGeneral,
+            precioGeneral: alojamiento.precioGeneral,
             fechaCreacion: alojamiento.fechaCreacion,
             imagenes: alojamiento.imagenes
           };
         });
         this.totalPages = Math.ceil(this.alojamientos.length / this.itemsPerPage);
-
         console.log("Datos de los Alojamientos cargados correctamente:", this.alojamientos);
       },
       error => {
@@ -148,32 +163,35 @@ export class AlojamientoComponent implements OnInit{
       }
     );
   }
+
+  // Exportar la lista de alojamientos a un archivo Excel
   exportToExcel() {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('TipoTurismo');
     worksheet.columns = [
-      {header: 'ID', key: 'id', width: 10},
-      {header: 'Nombre', key: 'nombre', width: 30},
-      {header: 'Destinos', key: 'destinos', width: 15},
-      {header: 'Tipo de Alojamiento', key: 'tipoAlojamiento', width: 15},
-      {header: 'Direccion', key: 'direccion', width: 20},
-      {header: 'Celular', key: 'celular', width: 20},
-      {header: 'Email', key: 'email', width: 20},
-      {header: 'WebUrl', key: 'webUrl', width: 20},
-      {header: 'Precio General', key: 'precioGeneral', width: 20},
-      {header: 'Fecha Actualizacion', key: 'fechaActualizacion', width: 20},
-      {header: 'Fecha Creacion', key: 'fechaCreacion', width: 20},
-
+      { header: 'ID', key: 'id', width: 10 },
+      { header: 'Nombre', key: 'nombre', width: 30 },
+      { header: 'Destinos', key: 'destinos', width: 15 },
+      { header: 'Tipo de Alojamiento', key: 'tipoAlojamiento', width: 15 },
+      { header: 'Direccion', key: 'direccion', width: 20 },
+      { header: 'Celular', key: 'celular', width: 20 },
+      { header: 'Email', key: 'email', width: 20 },
+      { header: 'WebUrl', key: 'webUrl', width: 20 },
+      { header: 'Precio General', key: 'precioGeneral', width: 20 },
+      { header: 'Fecha Actualizacion', key: 'fechaActualizacion', width: 20 },
+      { header: 'Fecha Creacion', key: 'fechaCreacion', width: 20 },
     ];
     this.alojamientos.forEach(alojamiento => {
       worksheet.addRow(alojamiento);
     });
     workbook.xlsx.writeBuffer().then(data => {
-      const blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       const url = window.URL.createObjectURL(blob);
       window.open(url);
     });
   }
+
+  // Ordenar columna
   sortColumn(columnName: string) {
     if (this.currentColumn === columnName) {
       this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
@@ -183,6 +201,8 @@ export class AlojamientoComponent implements OnInit{
     }
     this.sortData();
   }
+
+  // Metodo para ordenar los datos
   sortData() {
     if (this.currentColumn) {
       this.alojamientos.sort((a, b) => {
@@ -198,11 +218,14 @@ export class AlojamientoComponent implements OnInit{
       });
     }
   }
-  //Metodo para Eliminar
+
+  // Metodo para eliminar alojamiento
   onEliminarAlojamiento(alojamiento: Alojamiento) {
     this.alojamientoToDelete = alojamiento;
     this.confirmDelete();
   }
+
+  // Confirmar eliminación con SweetAlert
   confirmDelete() {
     if (this.alojamientoToDelete) {
       const tipoId = this.alojamientoToDelete.id;
@@ -238,6 +261,8 @@ export class AlojamientoComponent implements OnInit{
       });
     }
   }
+
+  // Realizar búsqueda
   performSearch() {
     if (this.searchText.trim() !== '') {
       const searchKeywords = this.searchText.toLowerCase().split(' ').filter(Boolean);
@@ -248,28 +273,36 @@ export class AlojamientoComponent implements OnInit{
       this.searchNotFound = this.filteredItems.length === 0;
       this.updateTable();
     } else {
-      this.displayedItems = [];
+      this.displayedItems = this.items;
       this.searchNotFound = false;
     }
   }
+
+  // Actualizar tabla
   updateTable() {
-    this.displayedItems = this.filteredItems;
+    const startIndex = (this.page - 1) * this.itemsPerPage;
+    this.displayedItems = this.filteredItems.slice(startIndex, startIndex + this.itemsPerPage);
   }
+
+  // Metodo para resaltar las coincidencias de búsqueda en el contenido
   highlightMatches(content: string, keyword: string): string {
-    if (!keyword.trim()) return content;
-    const regex = new RegExp(keyword, 'gi');
-    return content.replace(regex, match => `<span class="highlight">${match}</span>`);
+    if (!keyword.trim()) return content; // Si no hay palabra clave, devuelve el contenido original
+    const regex = new RegExp(keyword, 'gi'); // Crea una expresión regular para encontrar coincidencias, sin distinción de mayúsculas/minúsculas
+    return content.replace(regex, match => `<span class="highlight">${match}</span>`); // Reemplaza las coincidencias por un <span> con clase "highlight"
   }
 
+// Metodo para navegar a la página de creación de un nuevo tipo de alojamiento
   onNuevoTipo() {
-    this.router.navigate(['/nuevo-alojamiento']);
+    this.router.navigate(['/nuevo-alojamiento']); // Redirige a la ruta '/nuevo-alojamiento'
   }
 
+// Metodo genérico para navegar a cualquier ruta
   navigateTo(route: string) {
-    this.router.navigate([`/${route}`]);
-  }
-  toggleHelpModal() {
-    this.isHelpModalVisible = !this.isHelpModalVisible;
+    this.router.navigate([`/${route}`]); // Redirige a la ruta proporcionada
   }
 
+// Metodo para mostrar u ocultar el modal de ayuda
+  toggleHelpModal() {
+    this.isHelpModalVisible = !this.isHelpModalVisible; // Alterna el estado de visibilidad del modal de ayuda
+  }
 }
