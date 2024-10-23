@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {EditarImagesComponent} from "../editar-images/editar-images.component";
 import * as ExcelJS from "exceljs";
+
 interface Images{
   id: number;
   nombre: string;

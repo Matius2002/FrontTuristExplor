@@ -1,17 +1,23 @@
 <div class="container">
-  <h2>Módulo para agregar una Nueva Imagen</h2>
+  <h2>Módulo para agregar una Nueva Imagen</h2> <!-- Título del módulo -->
+
+  <!-- Formulario reactivo para crear una nueva imagen -->
   <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+
+    <!-- Campo para el nombre de la imagen -->
     <div class="form-group">
       <label for="nombre">Nombre de la Imagen</label>
       <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text">
+              <!-- Icono que indica que el campo es válido o no -->
               <i *ngIf="crearForm.get('nombre')?.valid || !crearForm.get('nombre')?.touched" class="fas fa-user"></i>
               <i *ngIf="crearForm.get('nombre')?.invalid && crearForm.get('nombre')?.touched" class="fas fa-times-circle text-danger"></i>
             </span>
         </div>
         <input type="text" id="nombre" formControlName="nombre" placeholder="Ingresa el Nombre de la Imagen">
       </div>
+      <!-- Mensajes de error para validaciones del campo nombre -->
       <div *ngIf="crearForm.get('nombre')?.invalid && (crearForm.get('nombre')?.dirty || crearForm.get('nombre')?.touched)">
         <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['required']">El Nombre es obligatorio.</div>
         <div class="text-danger" *ngIf="crearForm.get('nombre')?.errors?.['minlength']">El Nombre debe tener al menos 5 caracteres.</div>
@@ -19,32 +25,36 @@
       </div>
     </div>
 
+    <!-- Campo para seleccionar el archivo de imagen -->
     <div class="form-group">
       <label for="archivo" class="select-file-label">Seleccionar Archivo (Solo Imágenes)</label>
       <input id="archivo" type="file" accept="image/*" #fileInput (change)="onFileChange($event)" />
       <p class="file-info text-center">Tamaño (máximo 500MB cada una) en formato JPG, PNG, GIF o BMP:</p>
+      <!-- Mensajes de error para validaciones del campo archivo -->
       <div *ngIf="crearForm.get('ruta')?.invalid && crearForm.get('ruta')?.touched" class="error-messages">
         <span *ngIf="crearForm.get('ruta')?.errors?.['required']" class="error-message">La ruta es requerida.</span>
         <span *ngIf="selectedFiles.length > 0 && !validarTipoArchivo(selectedFiles[0])" class="error-message">Formato de archivo no válido. Solo se permiten archivos JPG, PNG, GIF o BMP.</span>
         <span *ngIf="selectedFiles.length > 0 && !validarTamanoArchivo(selectedFiles[0])" class="error-message">El tamaño del archivo excede el límite máximo de 500MB.</span>
       </div>
     </div>
+
+    <!-- Vista previa de la imagen seleccionada -->
     <div *ngIf="selectedFiles.length > 0">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">{{ selectedFiles[0].name }}</h5>
+          <h5 class="card-title">{{ selectedFiles[0].name }}</h5> <!-- Nombre del archivo seleccionado -->
           <div class="btn-group btn-group-sm" role="group" aria-label="Acciones">
             <button class="btn btn-outline-danger" (click)="eliminarFoto()">
-              <span class="d-md-none"><i class="fas fa-trash"></i></span>
-              <span class="d-none d-md-inline">Eliminar</span>
+              <span class="d-md-none"><i class="fas fa-trash"></i></span> <!-- Icono para eliminar -->
+              <span class="d-none d-md-inline">Eliminar</span> <!-- Texto para eliminar -->
             </button>
             <button class="btn btn-outline-primary" (click)="verFotoCompleta()">
-              <span class="d-md-none"><i class="fas fa-eye"></i></span>
-              <span class="d-none d-md-inline">Ver</span>
+              <span class="d-md-none"><i class="fas fa-eye"></i></span> <!-- Icono para ver -->
+              <span class="d-none d-md-inline">Ver</span> <!-- Texto para ver -->
             </button>
             <button class="btn btn-outline-warning" (click)="descargarFoto()">
-              <span class="d-md-none"><i class="fas fa-download"></i></span>
-              <span class="d-none d-md-inline">Descargar</span>
+              <span class="d-md-none"><i class="fas fa-download"></i></span> <!-- Icono para descargar -->
+              <span class="d-none d-md-inline">Descargar</span> <!-- Texto para descargar -->
             </button>
           </div>
         </div>
@@ -52,11 +62,11 @@
     </div>
     <!-- fin acciones de archivo -->
 
-    <!-- Botones -->
+    <!-- Botones para acciones del formulario -->
     <div class="form-group">
-      <button type="submit" class="custom-btn primary-btn" style="margin-left: 10px;">Guardar</button>
-      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar</button>
-      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
+      <button type="submit" class="custom-btn primary-btn" style="margin-left: 10px;">Guardar</button> <!-- Botón para guardar -->
+      <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar</button> <!-- Botón para limpiar el formulario -->
+      <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button> <!-- Botón para volver -->
     </div>
   </form>
 </div>
