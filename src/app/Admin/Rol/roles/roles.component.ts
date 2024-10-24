@@ -253,4 +253,6 @@ export class RolesComponent implements OnInit {
   toggleHelpModal() {
     this.isHelpModalVisible = !this.isHelpModalVisible;
   }
+
+    protected readonly Math = Math;
 }

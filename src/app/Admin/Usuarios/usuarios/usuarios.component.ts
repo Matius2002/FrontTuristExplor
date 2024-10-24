@@ -271,4 +271,6 @@ export class UsuariosComponent implements OnInit {
   toggleHelpModal() {
     this.isHelpModalVisible = !this.isHelpModalVisible;
   }
+
+  protected readonly Math = Math;
 }

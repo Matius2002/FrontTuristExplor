@@ -1,35 +1,16 @@
-<!-- Contenedor principal del mapa -->
-<div class="map-container">
-  <!-- Campo de búsqueda -->
-  <input id="pac-input" #searchBox class="controls" type="text" placeholder="Search Box">
-
-  <!-- Contenedor del mapa -->
-  <div id="map"></div>
+<div class="map-container"> <!--Contenedor principal-->
+  <input id="pac-input" #searchBox class="controls" type="text" placeholder="Search Box"> <!--Campo de busqueda-->
+  <div id="map"></div> <!--Contenedor del mapa-->
 
   <!-- Botones para filtrar categorías -->
   <div class="category-buttons">
-    <!-- Botón para filtrar lugares culturales -->
     <button (click)="filterCulturalPlaces()">Cultural</button>
-
-    <!-- Botón para filtrar lugares gastronómicos -->
     <button (click)="filterGastronomicPlaces()">Gastronómico</button>
-
-    <!-- Botón para filtrar lugares religiosos -->
     <button (click)="filterReligiousPlaces()">Religioso</button>
-
-    <!-- Botón para filtrar lugares de aventura -->
     <button (click)="filterAventurePlaces()">Aventura</button>
-
-    <!-- Botón para filtrar lugares sostenibles -->
     <button (click)="filterSustainablePlaces()">Sostenible</button>
-
-    <!-- Botón para filtrar lugares de compras -->
     <button (click)="filterPlaces('store')">Compras</button>
-
-    <!-- Botón para filtrar lugares nocturnos -->
     <button (click)="filterPlaces('night_club')">Nocturno</button>
-
-    <!-- Botón para filtrar alojamientos -->
     <button (click)="filterPlaces('hotel')">Alojamientos</button>
   </div>
 </div>
