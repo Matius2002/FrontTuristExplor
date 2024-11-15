@@ -44,7 +44,7 @@ export class NuevoTipoTurismoComponent implements OnInit{
   ngOnInit(): void {
     this.crearForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(250)]],
+      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(2000)]],
       popularidad: ['', [Validators.required]],
 
     });

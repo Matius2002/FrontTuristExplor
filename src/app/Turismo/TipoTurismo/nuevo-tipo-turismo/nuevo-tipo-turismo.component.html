@@ -1,4 +1,3 @@
-
 <div class="container">
   <h2>Módulo para agregar un nuevo Tipo de Turismo</h2>
   <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
@@ -36,7 +35,7 @@
       <div *ngIf="crearForm.get('descripcion')?.invalid && (crearForm.get('descripcion')?.dirty || crearForm.get('descripcion')?.touched)">
         <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</div>
         <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres.</div>
-        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['maxlength']">La descripción no debe exceder los 500 caracteres.</div>
+        <div class="text-danger" *ngIf="crearForm.get('descripcion')?.errors?.['maxlength']">La descripción no debe exceder los 2000 caracteres.</div>
       </div>
     </div>
     <!-- fin descripción -->
@@ -64,13 +63,11 @@
     </div>
     <!-- fin Popularidad -->
 
-
     <!-- Botones -->
     <div class="form-group">
       <button type="submit" class="custom-btn primary-btn" style="margin-left: 10px;">Guardar</button>
       <button type="button" class="custom-btn secondary-btn" style="margin-left: 10px;" (click)="limpiarFormulario()">Limpiar</button>
       <button type="button" class="custom-btn info-btn" style="margin-left: 10px;" (click)="volver()">Volver</button>
     </div>
-
   </form>
 </div>

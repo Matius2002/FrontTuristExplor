@@ -68,7 +68,7 @@ export class NuevoEventoComponent implements OnInit{
   ngOnInit(): void {
     this.crearForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(250)]],
+      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
       ubicacion: ['', [Validators.required]],
       fechaInicio: ['', [Validators.required]],
       fechaFin: ['', [Validators.required]],
